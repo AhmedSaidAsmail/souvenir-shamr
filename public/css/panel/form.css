@@ -1,0 +1,55 @@
+.form-wrapper > .card-header h2 {
+  font-size: 25px;
+  margin-bottom: 0;
+  color: #34495e;
+}
+.form-wrapper > .card-header .btn {
+  padding: 2px 10px;
+  font-size: 23px;
+}
+.form-wrapper > .card-body > nav > .nav-tabs > a {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 17px;
+  color: #40485b;
+}
+.form-wrapper > .card-body .tab-content {
+  padding: 10px 20px;
+}
+.form-wrapper > .card-body .tab-content .tab-pane {
+  width: 100%;
+}
+.form-wrapper > .card-body .form-control {
+  border-radius: 0;
+}
+.form-wrapper > .card-body .form-control:focus {
+  outline: 0;
+  box-shadow: none;
+  border-color: #34495e;
+}
+.form-wrapper > .card-body .input-group-text {
+  border-radius: 0;
+}
+.form-wrapper > .card-body .input-group-text > img {
+  width: 26px;
+}
+.form-wrapper .table {
+  font-family: 'Roboto', sans-serif;
+  margin-top: 20px;
+}
+.form-wrapper .table td,
+.form-wrapper .table th {
+  padding: 7px;
+}
+.form-wrapper .table input {
+  border: none;
+  padding: 2px 10px;
+  max-width: 140px;
+}
+.form-wrapper .table a.remove-row {
+  font-size: 20px;
+}
+.form-wrapper a.add-row {
+  margin-bottom: 40px;
+  border-radius: 0;
+}

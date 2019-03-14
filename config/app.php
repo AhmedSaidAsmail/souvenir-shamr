@@ -167,6 +167,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Sync\HasMany\SyncServiceProvider::class,
 
         /*
          * Application Service Providers...

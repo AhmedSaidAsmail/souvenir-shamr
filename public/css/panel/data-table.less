@@ -1,0 +1,60 @@
+@import "lib";
+
+.data-table-wrapper {
+  > .card-header {
+    h2 {
+      font-size: 18px;
+      margin-bottom: 0;
+      color: @color-asphalt;
+    }
+    .addable {
+      padding: 4px 25px;
+      border-radius: 0;
+      font-family: @font-Roboto;
+      font-size: 17px;
+      text-shadow: 1px 0 1px rgba(0,0,0,.3);
+    }
+  }
+  > .card-body {
+    table.table-customized {
+      th {
+        font-family: @font-Mallanna;
+      }
+      td {
+        padding-top: .45rem;
+        padding-bottom: .45rem;
+        &.numbers {
+          font-family: @font-lato;
+        }
+        &.status {
+          > .btn {
+            border-radius: 0;
+            padding: 1px 20px;
+            font-family: @font-Roboto;
+            font-size: 14px;
+            min-width: 70%;
+          }
+        }
+        &.actions {
+          i {
+            font-size: 19px;
+          }
+          > a {
+            &.editable {
+              color: #2980b9;
+            }
+
+          }
+          > form {
+            display: inline;
+            > button {
+              padding: 0;
+              background-color: rgba(255, 0, 0, 0);
+              border: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

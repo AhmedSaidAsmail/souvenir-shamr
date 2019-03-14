@@ -1,0 +1,66 @@
+@import "lib";
+
+.form-wrapper {
+  > .card-header {
+    h2 {
+      font-size: 25px;
+      margin-bottom: 0;
+      color: @color-asphalt;
+    }
+    .btn {
+      padding: 2px 10px;
+      font-size: 23px;
+    }
+  }
+  > .card-body {
+    > nav {
+      > .nav-tabs {
+        > a {
+          font-family: @font-Roboto;
+          font-weight: 500;
+          font-size: 17px;
+          color: @color-dark-blue;
+        }
+      }
+    }
+     .tab-content {
+      padding: 10px 20px;
+      .tab-pane {
+        width: 100%;
+      }
+    }
+    .form-control {
+      border-radius: 0;
+      &:focus {
+        outline: 0;
+        box-shadow: none;
+        border-color: @color-asphalt;
+      }
+    }
+    .input-group-text {
+      border-radius: 0;
+      > img {
+        width: 26px;
+      }
+    }
+  }
+  .table {
+    font-family: @font-Roboto;
+    margin-top: 20px;
+    & td, & th {
+      padding: 7px;
+    }
+    input {
+      border: none;
+      padding: 2px 10px;
+      max-width: 140px;
+    }
+    a.remove-row {
+      font-size: 20px;
+    }
+  }
+  a.add-row {
+    margin-bottom: 40px;
+    border-radius: 0;
+  }
+}

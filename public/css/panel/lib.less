@@ -1,0 +1,38 @@
+// Colors
+@color-dark-blue: #40485b;
+@color-carrot: #e67e22;
+@color-turquoise: #3ebfbe;
+@color-silver: #bdc3c7;
+@color-grey: #dddddd;
+@color-red-sidebar: #fb6b5b;
+@color-green-sidebar: #8ec165;
+@color-yellow-sidebar: #f5b259;
+@color-turquoise-sidebar: @color-turquoise;
+@color-purple-sidebar: #8e44ad;
+@color-asphalt: #34495e;
+@color-anti-flash-white: #f1f2f6;
+
+// Fonts
+@font-fontAwesome: 'Font Awesome\ 5 Free';
+@font-Mallanna: 'Mallanna', sans-serif;
+@font-Roboto: 'Roboto', sans-serif;
+@font-Raleway: 'Raleway', sans-serif;
+@font-lato: 'Lato', sans-serif;
+
+// Mixin
+.sidebarColor(@color,@bg-color) {
+  &.@{color} {
+    &:after {
+      background-color: @bg-color;
+    }
+  }
+}
+
+.symbolsAfter(@symbol,@top) {
+  content: '\@{symbol}';
+  font-family: @font-fontAwesome;
+  font-weight: 900;
+  position: absolute;
+  left: 100%;
+  top: @top;
+}

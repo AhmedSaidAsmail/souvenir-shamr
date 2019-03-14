@@ -1,0 +1,43 @@
+.data-table-wrapper > .card-header h2 {
+  font-size: 18px;
+  margin-bottom: 0;
+  color: #34495e;
+}
+.data-table-wrapper > .card-header .addable {
+  padding: 4px 25px;
+  border-radius: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 17px;
+  text-shadow: 1px 0 1px rgba(0, 0, 0, 0.3);
+}
+.data-table-wrapper > .card-body table.table-customized th {
+  font-family: 'Mallanna', sans-serif;
+}
+.data-table-wrapper > .card-body table.table-customized td {
+  padding-top: 0.45rem;
+  padding-bottom: 0.45rem;
+}
+.data-table-wrapper > .card-body table.table-customized td.numbers {
+  font-family: 'Lato', sans-serif;
+}
+.data-table-wrapper > .card-body table.table-customized td.status > .btn {
+  border-radius: 0;
+  padding: 1px 20px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  min-width: 70%;
+}
+.data-table-wrapper > .card-body table.table-customized td.actions i {
+  font-size: 19px;
+}
+.data-table-wrapper > .card-body table.table-customized td.actions > a.editable {
+  color: #2980b9;
+}
+.data-table-wrapper > .card-body table.table-customized td.actions > form {
+  display: inline;
+}
+.data-table-wrapper > .card-body table.table-customized td.actions > form > button {
+  padding: 0;
+  background-color: rgba(255, 0, 0, 0);
+  border: none;
+}

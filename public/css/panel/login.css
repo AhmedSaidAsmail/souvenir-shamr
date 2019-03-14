@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css?family=Mallanna');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Raleway:200,200i,300,300i,400,500,700,700i');
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700,900');
+body {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+.login-area {
+  width: 35%;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #f1f2f6;
+  box-shadow: 1px 0 3px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+.login-area > h1 {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 10px);
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  color: #40485b;
+  text-transform: uppercase;
+}
+.login-area .form-control,
+.login-area .input-group-text,
+.login-area .btn {
+  border-radius: 0;
+}
