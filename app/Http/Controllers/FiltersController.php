@@ -141,17 +141,4 @@ class FiltersController extends Controller
         return $rules;
     }
 
-//    private function flattenArrayWithRules(array $data, $prefix, $target, $rules, &$return = [])
-//    {
-//        foreach ($data as $key => $value) {
-//            if (is_array($value)) {
-//                $this->flattenArrayWithRules($value, $prefix . "." . $key, $target, $rules, $return);
-//            } else {
-//                if ($key == $target) {
-//                    $return[$prefix . "." . $key] = $rules;
-//                }
-//            }
-//        }
-//        return $return;
-//    }
 }

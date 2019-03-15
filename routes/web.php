@@ -19,9 +19,8 @@ Route::get('/', function () {
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('admin.login');
 Route::post('/login', 'Auth\LoginController@login')->name('admin.login');
 Route::get('/logout', 'Auth\LoginController@logout')->name('admin.logout');
-Route::group(['prefix' => 'admin', 'middleware' => 'auth:web'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:web', 'as' => 'admin.'], function () {
     Route::get('/', 'AdminController@welcome')->name('admin.welcome');
-    Route::resource('/filters', 'FiltersController', [
-        'as' => 'admin'
-    ]);
+    Route::resource('/filters', 'FiltersController');
+    Route::resource('/brands', 'BrandsController');
 });

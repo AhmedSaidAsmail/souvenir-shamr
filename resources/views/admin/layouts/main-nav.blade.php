@@ -5,17 +5,17 @@
     </div>
     <ul class="sidebar">
         <li>
-            <a href="{{route('admin.filters.index')}}" class="red">
-                <i class="fas fa-filter"></i> Filters
-            </a>
-        </li>
-        <li>
             <a href="" class="green">
                 <i class="fas fa-users"></i> Vendors
             </a>
         </li>
         <li>
-            <a href="" class="yellow">
+            <a href="{{route('admin.filters.index')}}" class="red">
+                <i class="fas fa-filter"></i> Filters
+            </a>
+        </li>
+        <li>
+            <a href="{{route('admin.brands.index')}}" class="yellow">
                 <i class="fas fa-bookmark"></i> Brands
             </a>
         </li>
