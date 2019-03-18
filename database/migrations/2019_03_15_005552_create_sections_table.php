@@ -15,6 +15,17 @@ class CreateSectionsTable extends Migration
     {
         Schema::create('sections', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('en_name')->unique();
+            $table->string('ar_name')->unique();
+            $table->string('it_name')->unique();
+            $table->string('ru_name')->unique();
+            $table->integer('sort_order')->default(0);
+            $table->boolean('status')->default(1);
+            $table->boolean('home')->default(0);
+            $table->integer('home_sort_order')->nullable();
+            $table->string('home_img')->nullable();
+            $table->string('symbol')->nullable();
+            $table->string('banner_img');
             $table->timestamps();
         });
     }

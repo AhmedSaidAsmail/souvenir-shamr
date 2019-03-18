@@ -23,4 +23,5 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:web', 'as' => 'admin.']
     Route::get('/', 'AdminController@welcome')->name('admin.welcome');
     Route::resource('/filters', 'FiltersController');
     Route::resource('/brands', 'BrandsController');
+    Route::resource('/sections','SectionsController');
 });

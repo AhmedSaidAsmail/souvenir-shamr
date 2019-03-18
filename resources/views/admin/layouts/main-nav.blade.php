@@ -20,7 +20,7 @@
             </a>
         </li>
         <li>
-            <a href="" class="turquoise">
+            <a href="{{route('admin.sections.index')}}" class="turquoise">
                 <i class="fas fa-tree"></i> Sections
             </a>
         </li>
