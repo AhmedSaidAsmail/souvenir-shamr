@@ -25,7 +25,7 @@
             </a>
         </li>
         <li>
-            <a href="" class="purple">
+            <a href="{{route('admin.categories.index')}}" class="purple">
                 <i class="fab fa-pagelines"></i> Categories
             </a>
         </li>
