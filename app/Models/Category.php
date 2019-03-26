@@ -10,6 +10,7 @@ class Category extends Model
         'section_id',
         'parent_id',
         'en_name',
+        'ar_name',
         'it_name',
         'ru_name',
         'sort_order',
@@ -33,12 +34,27 @@ class Category extends Model
         return $this->belongsTo(Category::class, 'parent_id', 'id');
     }
 
+    public function allChildren(&$children = [])
+    {
+        if ($this->children()->exists()) {
+            $categories = $this->children()->get()->all();
+            /**
+             * @var Category $category
+             */
+            foreach ($categories as $category) {
+                $children[] = $category;
+                $category->allChildren($children);
+            }
+        }
+        return $children;
+    }
+
     public function detail()
     {
         return $this->hasOne(CategoryDetail::class);
     }
 
-    public function links()
+    public function link()
     {
         return $this->hasOne(CategoryLink::class);
     }
@@ -46,6 +62,21 @@ class Category extends Model
     public function brands()
     {
         return $this->belongsToMany(Brand::class);
+    }
+
+    public function filters()
+    {
+        return $this->belongsToMany(Filter::class, 'filter_category');
+    }
+
+    public function syncLink(array $attributes = [])
+    {
+        if ($this->link()->exists() && !empty($attributes)) {
+            $this->link()->create($attributes);
+        } else {
+            $this->link()->update($attributes);
+        }
+
     }
 
     public function fullName($property, $separating = " > ")

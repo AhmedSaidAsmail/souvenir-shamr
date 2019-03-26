@@ -9,7 +9,7 @@
                 <a class="nav-link">Categories</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link">Create</a>
+                <a class="nav-link">Edit</a>
             </li>
         </ul>
         @include('admin.layouts.notification')
@@ -18,7 +18,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col">
-                            <h2>Add new category</h2>
+                            <h2>Update {{$category->en_name}}</h2>
                         </div>
                         <div class="col text-right">
                             <button class="btn btn-success" form="basic_form"><i class="fas fa-save"></i></button>
@@ -53,8 +53,10 @@
 
                         </div>
                     </nav>
-                    <form method="post" id="basic_form" action="{{route('admin.categories.store')}}">
+                    <form method="post" id="basic_form"
+                          action="{{route('admin.categories.update',['id'=>$category->id])}}">
                         {{csrf_field()}}
+                        <input type="hidden" name="_method" value="PUT">
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-category-basic" role="tabpanel"
                                  aria-labelledby="nav-category-basic-tab">
@@ -66,7 +68,7 @@
                                                     name="category[basic][section_id]">
                                                 <option value="">Select Section</option>
                                                 @foreach ($sections as $section)
-                                                    <option value="{{$section->id}}">{{$section->en_name}}</option>
+                                                    <option value="{{$section->id}}" {{$category->section->id==$section->id?"selected":null}}>{{$section->en_name}}</option>
                                                 @endforeach
 
                                             </select>
@@ -78,8 +80,9 @@
                                             <select class="form-control" id="parent_val"
                                                     name="category[basic][parent_id]" data-link="">
                                                 <option value="">--- None ---</option>
-                                                @foreach ($categories as $category)
-                                                    <option value="{{$category->id}}">{{$category->fullName('en_name')}}</option>
+                                                @foreach ($categories as $list_category)
+                                                    <option value="{{$list_category->id}}"
+                                                            {{isset($category->parent)&&$category->parent->id==$list_category->id?"selected":null}}>{{$list_category->fullName('en_name')}}</option>
                                                 @endforeach
 
                                             </select>
@@ -97,7 +100,7 @@
                                                 </span>
                                                 </div>
                                                 <input type="text" name="category[basic][en_name]" class="form-control"
-                                                       placeholder="English name"
+                                                       placeholder="English name" value="{{$category->en_name}}"
                                                        aria-label="Username" aria-describedby="en_name" required>
                                             </div>
                                         </div>
@@ -109,7 +112,7 @@
                                                 </span>
                                                 </div>
                                                 <input type="text" name="category[basic][ar_name]" class="form-control"
-                                                       placeholder="Arabic name"
+                                                       placeholder="Arabic name" value="{{$category->ar_name}}"
                                                        aria-label="Username" aria-describedby="ar_name" required>
                                             </div>
                                         </div>
@@ -121,7 +124,7 @@
                                                 </span>
                                                 </div>
                                                 <input type="text" name="category[basic][ru_name]" class="form-control"
-                                                       placeholder="Russian name"
+                                                       placeholder="Russian name" value="{{$category->ru_name}}"
                                                        aria-label="Username" aria-describedby="ru_name" required>
                                             </div>
                                         </div>
@@ -133,7 +136,7 @@
                                                 </span>
                                                 </div>
                                                 <input type="text" name="category[basic][it_name]" class="form-control"
-                                                       placeholder="Italian name"
+                                                       placeholder="Italian name" value="{{$category->it_name}}"
                                                        aria-label="Username" aria-describedby="it_name" required>
                                             </div>
                                         </div>
@@ -144,8 +147,9 @@
                                         <div class="form-group">
                                             <label>Status</label>
                                             <select class="form-control" name="category[basic][status]" required>
-                                                <option value="1" selected>Confirmed</option>
-                                                <option value="0">Pending</option>
+                                                <option value="1">Confirmed</option>
+                                                <option value="0" {{!$category->status?"selected":null}}>Pending
+                                                </option>
                                             </select>
                                         </div>
                                     </div>
@@ -153,15 +157,15 @@
                                         <div class="form-group">
                                             <label>Sort order</label>
                                             <input type="number" class="form-control" name="category[basic][sort_order]"
-                                                   value="0" required>
+                                                   value="{{$category->sort_order}}" required>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Home shortcut</label>
                                             <select class="form-control" name="category[basic][home]">
-                                                <option value="1" selected>Confirmed</option>
-                                                <option value="0">Pending</option>
+                                                <option value="1">Confirmed</option>
+                                                <option value="0" {{!$category->home?"selected":null}}>Pending</option>
                                             </select>
                                         </div>
                                     </div>
@@ -169,7 +173,8 @@
                                         <div class="form-group">
                                             <label>Home sort order</label>
                                             <input type="number" class="form-control"
-                                                   name="category[basic][home_sort_order]" value="0">
+                                                   name="category[basic][home_sort_order]"
+                                                   value="{{$category->home_sort_order}}">
                                         </div>
                                     </div>
                                 </div>
@@ -189,6 +194,7 @@
                                                 </div>
                                                 <input type="text" name="category[details][en_meta_title]"
                                                        class="form-control" placeholder="English name"
+                                                       value="{{$category->detail->en_meta_title}}"
                                                        aria-label="Username" aria-describedby="en_name" required>
                                             </div>
                                         </div>
@@ -201,6 +207,7 @@
                                                 </div>
                                                 <input type="text" name="category[details][ar_meta_title]"
                                                        class="form-control" placeholder="Arabic name"
+                                                       value="{{$category->detail->ar_meta_title}}"
                                                        aria-label="Username" aria-describedby="ar_name" required>
                                             </div>
                                         </div>
@@ -213,6 +220,7 @@
                                                 </div>
                                                 <input type="text" name="category[details][ru_meta_title]"
                                                        class="form-control" placeholder="Russian name"
+                                                       value="{{$category->detail->ru_meta_title}}"
                                                        aria-label="Username" aria-describedby="ru_name" required>
                                             </div>
                                         </div>
@@ -225,6 +233,7 @@
                                                 </div>
                                                 <input type="text" name="category[details][it_meta_title]"
                                                        class="form-control" placeholder="Italian name"
+                                                       value="{{$category->detail->it_meta_title}}"
                                                        aria-label="Username" aria-describedby="it_name" required>
                                             </div>
                                         </div>
@@ -242,6 +251,7 @@
                                                 </div>
                                                 <input type="text" name="category[details][en_meta_keywords]"
                                                        class="form-control" placeholder="English name"
+                                                       value="{{$category->detail->en_meta_keywords}}"
                                                        aria-label="Username" aria-describedby="en_name" required>
                                             </div>
                                         </div>
@@ -254,6 +264,7 @@
                                                 </div>
                                                 <input type="text" name="category[details][ar_meta_keywords]"
                                                        class="form-control" placeholder="Arabic name"
+                                                       value="{{$category->detail->ar_meta_keywords}}"
                                                        aria-label="Username" aria-describedby="ar_name" required>
                                             </div>
                                         </div>
@@ -266,6 +277,7 @@
                                                 </div>
                                                 <input type="text" name="category[details][ru_meta_keywords]"
                                                        class="form-control" placeholder="Russian name"
+                                                       value="{{$category->detail->ru_meta_keywords}}"
                                                        aria-label="Username" aria-describedby="ru_name" required>
                                             </div>
                                         </div>
@@ -278,6 +290,7 @@
                                                 </div>
                                                 <input type="text" name="category[details][it_meta_keywords]"
                                                        class="form-control" placeholder="Italian name"
+                                                       value="{{$category->detail->it_meta_keywords}}"
                                                        aria-label="Username" aria-describedby="it_name" required>
                                             </div>
                                         </div>
@@ -295,6 +308,7 @@
                                                 </div>
                                                 <input type="text" name="category[details][en_meta_description]"
                                                        class="form-control" placeholder="English name"
+                                                       value="{{$category->detail->en_meta_description}}"
                                                        aria-label="Username" aria-describedby="en_name" required>
                                             </div>
                                         </div>
@@ -307,6 +321,7 @@
                                                 </div>
                                                 <input type="text" name="category[details][ar_meta_description]"
                                                        class="form-control" placeholder="Arabic name"
+                                                       value="{{$category->detail->ar_meta_description}}"
                                                        aria-label="Username" aria-describedby="ar_name" required>
                                             </div>
                                         </div>
@@ -319,6 +334,7 @@
                                                 </div>
                                                 <input type="text" name="category[details][ru_meta_description]"
                                                        class="form-control" placeholder="Russian name"
+                                                       value="{{$category->detail->ru_meta_description}}"
                                                        aria-label="Username" aria-describedby="ru_name" required>
                                             </div>
                                         </div>
@@ -331,6 +347,7 @@
                                                 </div>
                                                 <input type="text" name="category[details][it_meta_description]"
                                                        class="form-control" placeholder="Italian name"
+                                                       value="{{$category->detail->it_meta_description}}"
                                                        aria-label="Username" aria-describedby="it_name" required>
                                             </div>
                                         </div>
@@ -346,8 +363,14 @@
                                         <div class="form-group">
                                             <label>Brands</label>
                                             <select name="category[brands][]" class="form-control multi-choice"
-                                                    data-link="{{route('admin.categories.brands')}}"
+                                                    data-link="{{route('admin.categories.brands',['id'=>$category->id])}}"
                                                     multiple="multiple" id="brands_val" style="width: 100%">
+                                                <?php
+                                                $brands_list = array_column($category->brands->toArray(), 'id');
+                                                ?>
+                                                @foreach($category->section->brands as $brand)
+                                                    <option value="{{$brand->id}}" {{in_array($brand->id,$brands_list)?"selected":null}}>{{$brand->en_name}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -363,8 +386,11 @@
                                             <label>Brands</label>
                                             <select name="category[filters][]" class="form-control multi-choice"
                                                     multiple="multiple" style="width: 100%">
+                                                <?php
+                                                $filter_list = array_column($category->filters->toArray(), 'id');
+                                                ?>
                                                 @foreach($filters as $filter)
-                                                    <option value="{{$filter->id}}">{{$filter->en_name}}</option>
+                                                    <option value="{{$filter->id}}" {{in_array($filter->id,$filter_list)?"selected":null}}>{{$filter->en_name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -379,19 +405,22 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Header 1</label>
-                                            <input name="category[link][header_1]" class="form-control">
+                                            <input name="category[link][header_1]" class="form-control"
+                                                   value="{{$category->link->header_1}}">
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Header 2</label>
-                                            <input name="category[link][header_2]" class="form-control">
+                                            <input name="category[link][header_2]" class="form-control"
+                                                   value="{{$category->link->header_2}}">
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Link</label>
-                                            <input name="category[link][link]" class="form-control">
+                                            <input name="category[link][link]" class="form-control"
+                                                   value="{{$category->link->link}}">
                                         </div>
                                     </div>
                                 </div>

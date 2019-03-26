@@ -24,5 +24,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:web', 'as' => 'admin.']
     Route::resource('/filters', 'FiltersController');
     Route::resource('/brands', 'BrandsController');
     Route::resource('/sections', 'SectionsController');
+    Route::get('/categories/brand/category/{id?}/', 'CategoriesController@getBrands')->name('categories.brands');
     Route::resource('/categories', 'CategoriesController');
 });
