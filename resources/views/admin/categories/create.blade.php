@@ -62,7 +62,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Section Name:</label>
-                                            <select class="form-control" id="section_val"
+                                            <select class="form-control" id="section_input"
                                                     name="category[basic][section_id]">
                                                 <option value="">Select Section</option>
                                                 @foreach ($sections as $section)
@@ -75,8 +75,9 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Parent:</label>
-                                            <select class="form-control" id="parent_val"
-                                                    name="category[basic][parent_id]" data-link="">
+                                            <select class="form-control" id="parent_input"
+                                                    name="category[basic][parent_id]"
+                                                    data-link="{{route('admin.categories.brands')}}">
                                                 <option value="">--- None ---</option>
                                                 @foreach ($categories as $category)
                                                     <option value="{{$category->id}}">{{$category->fullName('en_name')}}</option>
@@ -342,12 +343,14 @@
                             <div class="tab-pane fade" id="nav-brands" role="tabpanel"
                                  aria-labelledby="nav-brands-tab">
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col" id="brands_area">
                                         <div class="form-group">
                                             <label>Brands</label>
                                             <select name="category[brands][]" class="form-control multi-choice"
-                                                    data-link="{{route('admin.categories.brands')}}"
                                                     multiple="multiple" id="brands_val" style="width: 100%">
+                                                @foreach($brands as $brand)
+                                                    <option value="{{$brand->id}}">{{$brand->en_name}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -360,7 +363,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Brands</label>
+                                            <label>Filters</label>
                                             <select name="category[filters][]" class="form-control multi-choice"
                                                     multiple="multiple" style="width: 100%">
                                                 @foreach($filters as $filter)
@@ -418,43 +421,43 @@
         $('.multi-choice').select2();
     </script>
     <script>
-        var section_val = $("#section_val");
-        var parent_val = $("#parent_val");
+        var section_input = $("#section_input");
+        var parent_input = $("#parent_input");
+        var brands_area=$("#brands_area");
         var brands_val = $("#brands_val");
 
         function getBrands() {
-            var section = section_val.val();
-            var category = parent_val.val();
-            var url = brands_val.attr('data-link');
+            var category = parent_input.val();
+            var url = parent_input.attr('data-link') + "/" + category;
             $.ajax({
                 url: url,
                 type: "get",
-                data: {section: section, category: category},
                 success: function (response) {
-                    brands_val.html(response);
+                    brands_area.html(response);
+                    $('.multi-choice').select2();
                 }
             });
         }
 
-        section_val.change(function () {
+        section_input.change(function () {
             var val = $(this).val();
             if (val) {
-                parent_val.prop('disabled', true);
-                parent_val.prop('selectedIndex', 0);
-                getBrands();
+                parent_input.prop('disabled', true);
+                parent_input.prop('selectedIndex', 0);
                 return true;
             }
-            parent_val.prop('disabled', false);
+            parent_input.prop('disabled', false);
         });
-        parent_val.change(function () {
+        parent_input.change(function () {
             var val = $(this).val();
             if (val) {
-                section_val.prop('disabled', true);
-                section_val.prop('selectedIndex', 0);
+                section_input.prop('disabled', true);
+                section_input.prop('selectedIndex', 0);
                 getBrands();
                 return true;
             }
-            section_val.prop('disabled', false);
+            section_input.prop('disabled', false);
+            getBrands();
         });
     </script>
 @endsection

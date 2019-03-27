@@ -46,7 +46,7 @@
                             <tr>
                                 <td>{{$category->id}}</td>
                                 <td>{{$category->section->en_name}}</td>
-                                <td>{{$category->en_name}}</td>
+                                <td>{{$category->fullName('en_name')}}</td>
                                 <td>{{$category->sort_order}}</td>
                                 <td class="numbers">{{$category->created_at}}</td>
                                 <td class="status">

@@ -34,6 +34,10 @@ class Category extends Model
         return $this->belongsTo(Category::class, 'parent_id', 'id');
     }
 
+    /**
+     * @param array $children
+     * @return Category[]
+     */
     public function allChildren(&$children = [])
     {
         if ($this->children()->exists()) {
@@ -47,6 +51,22 @@ class Category extends Model
             }
         }
         return $children;
+    }
+
+    public function allBrands(&$brands = [])
+    {
+        $brands = array_merge($brands, array_udiff($this->brands()->get()->all(), $brands, function ($brand_1, $brand_2) {
+            $id_1 = $brand_1->id;
+            $id_2 = $brand_2->id;
+            if ($id_1 == $id_2) {
+                return 0;
+            }
+            return $id_1 > $id_2 ? 1 : -1;
+        }));
+        if ($this->parent()->exists()) {
+            $this->parent()->first()->allBrands($brands);
+        }
+        return $brands;
     }
 
     public function detail()
@@ -71,7 +91,7 @@ class Category extends Model
 
     public function syncLink(array $attributes = [])
     {
-        if ($this->link()->exists() && !empty($attributes)) {
+        if (!$this->link()->exists() && !empty($attributes)) {
             $this->link()->create($attributes);
         } else {
             $this->link()->update($attributes);

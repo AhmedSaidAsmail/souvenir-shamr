@@ -34,7 +34,7 @@ class CategoriesController extends Controller
         $categories = Category::all();
         $filters = Filter::all();
         $brands = Brand::all();
-        return view('admin.categories.create', compact('sections', 'categories', 'filters','brands'));
+        return view('admin.categories.create', compact('sections', 'categories', 'filters', 'brands'));
     }
 
     /**
@@ -80,16 +80,17 @@ class CategoriesController extends Controller
      */
     public function edit(Category $category)
     {
-        dd($category->children()->get());
-//        $all=$category->allChildren();
-//       foreach ($all as $cat){
-//           echo $cat->id.'<br>';
-//       }
-//        dd($category->children()->get()->toArray());
-//        $sections = Section::all();
-//        $categories = Category::where('id', "<>", $category->id)->get();
-//        $filters = Filter::all();
-//        return view('admin.categories.edit', compact('category', 'sections', 'categories', 'filters'));
+
+        $allChildrenId = array_map(function ($category) {
+            return $category->id;
+        }, $category->allChildren());
+        $sections = Section::all();
+        $categories = Category::whereNotIn('id', array_merge([$category->id], $allChildrenId))->get();
+        $filters = Filter::all();
+        return view('admin.categories.edit',
+            array_merge(compact('category', 'sections', 'categories', 'filters', 'brands'),
+                $this->brandsSplit($category->parent()->first()))
+        );
     }
 
     /**
@@ -105,6 +106,7 @@ class CategoriesController extends Controller
         $this->prepareSection($attributes);
         $this->validator($attributes, $category->id);
         try {
+            $this->sectionUpdate($category, $attributes['basic']);
             $category->update($attributes['basic']);
             $category->detail()->create($attributes['details']);
             $category->syncLink($attributes['link']);
@@ -120,29 +122,39 @@ class CategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  Category $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('admin.categories.index')->with('success', 'Category has been deleted');
     }
 
     /**
-     * @param Request $request
-     * @param null|integer $category_id
+     * @param integer|null $category_id
      * @return \Illuminate\Http\Response
      */
-    public function getBrands(Request $request, $category_id = null)
+    public function getBrands($category_id = null)
     {
-        $brands = null;
-        if ($section = $request->get('section')) {
-            $brands = Section::find($section)->brands;
-        } elseif ($selected_category = $request->get('category')) {
-            $brands = Category::find($selected_category)->section->brands;
-        }
         $category = !is_null($category_id) ? Category::find($category_id) : null;
-        return view('admin.categories.layouts.brands', compact('brands', 'category'));
+        return view('admin.categories.layouts.brands', $this->brandsSplit($category));
+    }
+
+    /**
+     * @param Category|null $category
+     * @return array
+     */
+    private function brandsSplit(Category $category = null)
+    {
+        $category_brands = !is_null($category) ? $category->allBrands() : [];
+        $not_category_brands = array_filter(Brand::all()->all(), function ($brand) use ($category_brands) {
+            return !in_array($brand->id, array_map(function ($category_brand) {
+                return $category_brand->id;
+            }, $category_brands));
+        });
+        return compact('category_brands', 'not_category_brands');
+
     }
 
     /**
@@ -177,11 +189,12 @@ class CategoriesController extends Controller
             'details.it_meta_description' => 'required|string',
             'details.ru_meta_description' => 'required|string',
             // Brands
-            'brands.*' => ['required', Rule::exists('brand_section', 'brand_id')->where(function ($query) use ($attributes) {
-                $query->where('section_id', $attributes['basic']['section_id']);
-            })],
+//            'brands.*' => ['required', Rule::exists('brand_section', 'brand_id')->where(function ($query) use ($attributes) {
+//                $query->where('section_id', $attributes['basic']['section_id']);
+//            })],
+            'brands.*' => 'required_without:basic.parent_id|integer|exists:brands,id',
             //Filters
-            'filters.*' => 'required:integer|exists:filters,id',
+            'filters.*' => 'required_without:basic.parent_id|integer|exists:filters,id',
             // links
             'link.header_1' => 'string',
             'link.header_2' => 'string',
@@ -200,5 +213,29 @@ class CategoriesController extends Controller
         if (!isset($attributes['basic']['section_id']) && $parent_id = $attributes['basic']['parent_id']) {
             $attributes['basic']['section_id'] = Category::find($parent_id)->section->id;
         }
+    }
+
+    /**
+     * @param Category $category
+     * @param array $attributes
+     */
+    private function sectionUpdate(Category $category, array $attributes)
+    {
+        if ($this->categoryHasDifferentSection($category, $attributes) && $section = $attributes['section_id']) {
+            foreach ($category->allChildren() as $child) {
+                $child->update(['section_id' => $section]);
+            }
+        }
+    }
+
+    /**
+     * @param Category $category
+     * @param array $attributes
+     * @return bool
+     */
+    private function categoryHasDifferentSection(Category $category, array $attributes)
+    {
+        return array_key_exists('section_id', $attributes) && $attributes['section_id'] != $category->section->id;
+
     }
 }
