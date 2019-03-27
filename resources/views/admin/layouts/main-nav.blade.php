@@ -5,7 +5,7 @@
     </div>
     <ul class="sidebar">
         <li>
-            <a href="" class="green">
+            <a href="{{route('admin.vendors.index')}}" class="green">
                 <i class="fas fa-users"></i> Vendors
             </a>
         </li>
