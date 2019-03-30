@@ -15,6 +15,11 @@ class Filter extends Model
         return $this->hasMany(FilterItem::class);
     }
 
+    public function ProductItems($product_id)
+    {
+        return $this->hasMany(ProductFilterItem::class)->where('product_id', $product_id);
+    }
+
     public function delete()
     {
         parent::delete();

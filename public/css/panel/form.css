@@ -53,3 +53,31 @@
   margin-bottom: 40px;
   border-radius: 0;
 }
+section#filters_area > .card {
+  margin-bottom: 10px;
+}
+section#filters_area > .card > .card-header {
+  position: relative;
+}
+section#filters_area > .card > .card-header > a.remove-filter {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+}
+.filter-item-wrapper {
+  width: 100%;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #dddddd;
+  padding-bottom: 10px;
+}
+.filter-item-wrapper > .row {
+  margin-bottom: 10px;
+}
+.single-input {
+  margin-top: 10px;
+  border: 1px solid #bdc3c7;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-right: 0;
+  margin-left: 0;
+}

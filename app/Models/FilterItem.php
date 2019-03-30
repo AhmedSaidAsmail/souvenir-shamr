@@ -9,4 +9,14 @@ class FilterItem extends Model
     protected $fillable = [
         'filter_id', 'en_name', 'ar_name', 'it_name', 'ru_name', 'sort_order'
     ];
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_filter_items', 'filter_item_id');
+    }
+
+    public function productItems()
+    {
+        return $this->hasMany(ProductFilterItem::class, 'filter_item_id');
+    }
 }

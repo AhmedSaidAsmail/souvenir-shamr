@@ -30,7 +30,7 @@
             </a>
         </li>
         <li>
-            <a href="" class="red">
+            <a href="{{route('admin.products.index')}}" class="red">
                 <i class="fab fa-product-hunt"></i> Products
             </a>
         </li>
