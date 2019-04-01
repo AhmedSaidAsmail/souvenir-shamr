@@ -9,7 +9,7 @@
                 <a class="nav-link">Products</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link">Create</a>
+                <a class="nav-link">Edit</a>
             </li>
         </ul>
         @include('admin.layouts.notification')
@@ -18,7 +18,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col">
-                            <h2>Add new category</h2>
+                            <h2>Update product: {{$product->en_name}}</h2>
                         </div>
                         <div class="col text-right">
                             <button class="btn btn-success" form="basic_form"><i class="fas fa-save"></i></button>
@@ -70,7 +70,8 @@
                                                     name="product[basic][category_id]" required>
                                                 <option value="">--- None ---</option>
                                                 @foreach ($categories as $category)
-                                                    <option value="{{$category->id}}">{{$category->fullName('en_name')}}</option>
+                                                    <option value="{{$category->id}}" {!! $category->id==$product->category->id?"selected":null !!}>
+                                                        {{$category->fullName('en_name')}}</option>
                                                 @endforeach
 
                                             </select>
@@ -82,6 +83,11 @@
                                             <select name="product[basic][brand_id]" id="brands_selection"
                                                     class="form-control" data-link="{{route('admin.products.brands')}}"
                                                     required>
+                                                <option value="">Select Brand</option>
+                                                @foreach($product->category->brands as $brand)
+                                                    <option value="{{$brand->id}}" {!! $brand->id==$product->brand_id?"selected":null !!}>
+                                                        {{$brand->en_name}}</option>
+                                                @endforeach
 
                                             </select>
                                         </div>
@@ -89,7 +95,8 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Model</label>
-                                            <input name="product[basic][model]" class="form-control" required>
+                                            <input name="product[basic][model]" value="{{$product->model}}"
+                                                   class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -98,7 +105,7 @@
                                             <select name="product[basic][vendor_id]" class="form-control" required>
                                                 <option value="">Select a vendor</option>
                                                 @foreach($vendors as $vendor)
-                                                    <option value="{{$vendor->id}}">{{$vendor->name}}</option>
+                                                    <option value="{{$vendor->id}}" {!! $vendor->id==$product->vendor_id?"selected":null  !!}>{{$vendor->name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -115,7 +122,7 @@
                                                 </span>
                                                 </div>
                                                 <input type="text" name="product[basic][en_name]" class="form-control"
-                                                       placeholder="English name"
+                                                       placeholder="English name" value="{{$product->en_name}}"
                                                        aria-label="Username" aria-describedby="en_name" required>
                                             </div>
                                         </div>
@@ -127,7 +134,7 @@
                                                 </span>
                                                 </div>
                                                 <input type="text" name="product[basic][ar_name]" class="form-control"
-                                                       placeholder="Arabic name"
+                                                       placeholder="Arabic name" value="{{$product->ar_name}}"
                                                        aria-label="Username" aria-describedby="ar_name" required>
                                             </div>
                                         </div>
@@ -139,7 +146,7 @@
                                                 </span>
                                                 </div>
                                                 <input type="text" name="product[basic][ru_name]" class="form-control"
-                                                       placeholder="Russian name"
+                                                       placeholder="Russian name" value="{{$product->ru_name}}"
                                                        aria-label="Username" aria-describedby="ru_name" required>
                                             </div>
                                         </div>
@@ -151,7 +158,7 @@
                                                 </span>
                                                 </div>
                                                 <input type="text" name="product[basic][it_name]" class="form-control"
-                                                       placeholder="Italian name"
+                                                       placeholder="Italian name" value="{{$product->it_name}}"
                                                        aria-label="Username" aria-describedby="it_name" required>
                                             </div>
                                         </div>
@@ -162,8 +169,9 @@
                                         <div class="form-group">
                                             <label>Status</label>
                                             <select class="form-control" name="product[basic][status]" required>
-                                                <option value="1" selected>Confirmed</option>
-                                                <option value="0">Pending</option>
+                                                <option value="1">Confirmed</option>
+                                                <option value="0" {!! !$product->status?"selected":null !!}>Pending
+                                                </option>
                                             </select>
                                         </div>
                                     </div>
@@ -171,14 +179,15 @@
                                         <div class="form-group">
                                             <label>Sort order</label>
                                             <input type="number" class="form-control" name="product[basic][sort_order]"
-                                                   value="0" required>
+                                                   value="{{$product->sort_order}}" required>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Price</label>
                                             <input type="number" class="form-control"
-                                                   name="product[basic][price]" min="1" value="0" required>
+                                                   name="product[basic][price]" min="1" value="{{$product->price}}"
+                                                   required>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -186,7 +195,8 @@
                                             <label>Shipping</label>
                                             <select class="form-control" name="product[basic][shipping]">
                                                 <option value="1">true</option>
-                                                <option value="0">false</option>
+                                                <option value="0" {!! !$product->shipping?"selected":null !!}>false
+                                                </option>
                                             </select>
                                         </div>
                                     </div>
@@ -202,22 +212,23 @@
                                         <div class="form-group">
                                             <label>Quantity</label>
                                             <input type="number" class="form-control" name="product[basic][quantity]"
-                                                   value="0" min="1" required>
+                                                   value="{{$product->quantity}}" min="1" required>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Minimum quantity</label>
                                             <input type="number" class="form-control"
-                                                   name="product[basic][min_quantity]" min="1" value="0" required>
+                                                   name="product[basic][min_quantity]" min="1"
+                                                   value="{{$product->min_quantity}}" required>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Available date</label>
-                                            <input value="{{\Carbon\Carbon::today()->format('Y-m-d')}}"
-                                                   class="form-control"
-                                                   name="product[basic][date_available]" dataformatas="">
+                                            <input value="{{$product->date_available->format('Y-m-d')}}"
+                                                   class="form-control" name="product[basic][date_available]"
+                                                   dataformatas="">
                                         </div>
                                     </div>
                                 </div>
@@ -237,6 +248,7 @@
                                                 </div>
                                                 <input type="text" name="product[details][en_meta_title]"
                                                        class="form-control" placeholder="English name"
+                                                       value="{{$product->meta->en_meta_title}}"
                                                        aria-label="Username" aria-describedby="en_name" required>
                                             </div>
                                         </div>
@@ -249,6 +261,7 @@
                                                 </div>
                                                 <input type="text" name="product[details][ar_meta_title]"
                                                        class="form-control" placeholder="Arabic name"
+                                                       value="{{$product->meta->ar_meta_title}}"
                                                        aria-label="Username" aria-describedby="ar_name" required>
                                             </div>
                                         </div>
@@ -261,6 +274,7 @@
                                                 </div>
                                                 <input type="text" name="product[details][ru_meta_title]"
                                                        class="form-control" placeholder="Russian name"
+                                                       value="{{$product->meta->ru_meta_title}}"
                                                        aria-label="Username" aria-describedby="ru_name" required>
                                             </div>
                                         </div>
@@ -273,6 +287,7 @@
                                                 </div>
                                                 <input type="text" name="product[details][it_meta_title]"
                                                        class="form-control" placeholder="Italian name"
+                                                       value="{{$product->meta->it_meta_title}}"
                                                        aria-label="Username" aria-describedby="it_name" required>
                                             </div>
                                         </div>
@@ -290,6 +305,7 @@
                                                 </div>
                                                 <input type="text" name="product[details][en_meta_keywords]"
                                                        class="form-control" placeholder="English name"
+                                                       value="{{$product->meta->en_meta_keywords}}"
                                                        aria-label="Username" aria-describedby="en_name" required>
                                             </div>
                                         </div>
@@ -302,6 +318,7 @@
                                                 </div>
                                                 <input type="text" name="product[details][ar_meta_keywords]"
                                                        class="form-control" placeholder="Arabic name"
+                                                       value="{{$product->meta->ar_meta_keywords}}"
                                                        aria-label="Username" aria-describedby="ar_name" required>
                                             </div>
                                         </div>
@@ -314,6 +331,7 @@
                                                 </div>
                                                 <input type="text" name="product[details][ru_meta_keywords]"
                                                        class="form-control" placeholder="Russian name"
+                                                       value="{{$product->meta->ru_meta_keywords}}"
                                                        aria-label="Username" aria-describedby="ru_name" required>
                                             </div>
                                         </div>
@@ -326,6 +344,7 @@
                                                 </div>
                                                 <input type="text" name="product[details][it_meta_keywords]"
                                                        class="form-control" placeholder="Italian name"
+                                                       value="{{$product->meta->it_meta_keywords}}"
                                                        aria-label="Username" aria-describedby="it_name" required>
                                             </div>
                                         </div>
@@ -343,6 +362,7 @@
                                                 </div>
                                                 <input type="text" name="product[details][en_meta_description]"
                                                        class="form-control" placeholder="English name"
+                                                       value="{{$product->meta->en_meta_description}}"
                                                        aria-label="Username" aria-describedby="en_name" required>
                                             </div>
                                         </div>
@@ -355,6 +375,7 @@
                                                 </div>
                                                 <input type="text" name="product[details][ar_meta_description]"
                                                        class="form-control" placeholder="Arabic name"
+                                                       value="{{$product->meta->ar_meta_description}}"
                                                        aria-label="Username" aria-describedby="ar_name" required>
                                             </div>
                                         </div>
@@ -367,6 +388,7 @@
                                                 </div>
                                                 <input type="text" name="product[details][ru_meta_description]"
                                                        class="form-control" placeholder="Russian name"
+                                                       value="{{$product->meta->ru_meta_description}}"
                                                        aria-label="Username" aria-describedby="ru_name" required>
                                             </div>
                                         </div>
@@ -379,6 +401,7 @@
                                                 </div>
                                                 <input type="text" name="product[details][it_meta_description]"
                                                        class="form-control" placeholder="Italian name"
+                                                       value="{{$product->meta->it_meta_description}}"
                                                        aria-label="Username" aria-describedby="it_name" required>
                                             </div>
                                         </div>
@@ -391,19 +414,27 @@
                                  aria-labelledby="nav-description-tab">
                                 <div class="form-group">
                                     <label>English description</label>
-                                    <textarea id="editor" name="product[description][en_description]"></textarea>
+                                    <textarea id="editor" name="product[description][en_description]">
+                                        {{$product->description->en_description}}
+                                    </textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>Arabic description</label>
-                                    <textarea id="editor_2" name="product[description][ar_description]"></textarea>
+                                    <textarea id="editor_2" name="product[description][ar_description]">
+                                        {{$product->description->ar_description}}
+                                    </textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>Russian description</label>
-                                    <textarea id="editor_3" name="product[description][ru_description]"></textarea>
+                                    <textarea id="editor_3" name="product[description][ru_description]">
+                                        {{$product->description->ru_description}}
+                                    </textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>Italian description</label>
-                                    <textarea id="editor_4" name="product[description][it_description]"></textarea>
+                                    <textarea id="editor_4" name="product[description][it_description]">
+                                        {{$product->description->it_description}}
+                                    </textarea>
                                 </div>
                             </div>
                             {{-- end description --}}
@@ -416,12 +447,39 @@
                                             <label>Filters</label>
                                             <select class="form-control" id="filter_selection"
                                                     data-link="{{route('admin.products.filters')}}">
+                                                <option value="">Select Filter</option>
+                                                @foreach($product->filters as $filter)
+                                                    <option value="{{$filter->id}}">{{$filter->en_name}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <section id="filters_area" data-link="{{route('admin.products.filters.items')}}">
                                     {{-- filters --}}
+                                    @foreach($product->filters as $filter)
+                                        <div class="card" tabindex="{{$filter->id}}">
+                                            <div class="card-header">
+                                                <a href="#" class="btn btn-danger remove-filter">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                                {{$filter->en_name}}
+                                                <input type="hidden" name="product[filters][{{$filter->id}}][filter_id]"
+                                                       value="{{$filter->id}}">
+                                            </div>
+                                            <div class="card-body">
+                                                <select name="product[filter_items][{{$filter->id}}][]"
+                                                        class="form-control multi-choice" multiple="multiple"
+                                                        style="width: 100%">
+                                                    <option value="">Select filter item</option>
+                                                    @foreach($filter->items as $item)
+                                                        <option value="{{$item->id}}" {!! in_array($item->id,$product->productFilterList())?"selected":null !!}>
+                                                            {{$item->en_name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </section>
 
                             </div>

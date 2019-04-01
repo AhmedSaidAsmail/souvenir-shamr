@@ -25,7 +25,7 @@ class Product extends Model
         'date_available',
     ];
     protected $casts = [
-        'date_available' => 'data'
+        'date_available' => 'date'
     ];
 
     public function vendor()
@@ -60,6 +60,11 @@ class Product extends Model
 
     public function productFilters()
     {
-        return $this->hasMany(ProductFilter::class);
+        return $this->belongsToMany(FilterItem::class, 'product_filter_items');
+    }
+
+    public function productFilterList()
+    {
+        return array_column($this->productFilters()->get()->toArray(), 'id');
     }
 }

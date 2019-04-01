@@ -31,4 +31,5 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:web', 'as' => 'admin.']
     Route::get('/products/filters/category/{id?}/', 'ProductsController@getFilters')->name('products.filters');
     Route::get('/products/filters/filter/{id?}/', 'ProductsController@getFilterItems')->name('products.filters.items');
     Route::resource('products', 'ProductsController');
+    Route::resource('products/{product_id}/gallery', 'ProductGalleriesController');
 });

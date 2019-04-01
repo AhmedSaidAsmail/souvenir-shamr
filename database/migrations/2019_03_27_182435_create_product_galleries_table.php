@@ -18,8 +18,9 @@ class CreateProductGalleriesTable extends Migration
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->integer('sort_order')->default(0);
+            $table->integer('filter_item_id')->nullable()->unsigned();
+            $table->foreign('filter_item_id')->references('id')->on('filter_items')->onDelete('cascade');
             $table->string('image');
-            $table->integer('filter_id')->nullable();
             $table->timestamps();
         });
     }
