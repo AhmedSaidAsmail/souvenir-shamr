@@ -101,7 +101,7 @@
                 '                                        </select>\n' +
                 '                                    </div>\n' +
                 '                                    <div class="col-md-2">\n' +
-                '                                        <input type="number" min="0" class="form-control" name="gallery[' + index + '][sort_order]"\n' +
+                '                                        <input type="number" min="0" value="0" class="form-control" name="gallery[' + index + '][sort_order]"\n' +
                 '                                               placeholder="Sort order" required>\n' +
                 '                                    </div>\n' +
                 '                                    <div class="col-md-1">\n' +

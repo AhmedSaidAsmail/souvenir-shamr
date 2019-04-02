@@ -170,6 +170,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Sync\HasMany\SyncServiceProvider::class,
         Uploading\Image\UploadingServiceProvider::class,
+        Matrix\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...

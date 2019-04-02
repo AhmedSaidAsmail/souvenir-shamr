@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductGallery;
 use Illuminate\Http\Request;
 
 class ProductGalleriesController extends Controller
@@ -45,19 +46,23 @@ class ProductGalleriesController extends Controller
      */
     public function store(Request $request, $product_id)
     {
-        $product=Product::findOrFail($product_id);
-        $attributes = $request->all()['gallery'];
-        multipleImage($attributes, 'image', $this->path, function ($file) {
-            $file->thumb('thumb', 500)
-                ->upload();
-            return $file->image_name;
-        });
+        /**
+         * @var Product $product
+         */
+        $product = Product::findOrFail($product_id);
+        $attributes = $request->has('gallery') ? $request->all()['gallery'] : [];
+        uploadingResolver()
+            ->model(new ProductGallery())
+            ->multipleUpload($attributes, 'image', $this->path, function ($image) {
+                $image->thumb(250);
+            });
         try {
             resolve('sync')
                 ->setAttributes($product->gallery(), $attributes)
                 ->sync();
+            return redirect()->route('admin.products.index')->with('success', 'Successfully product has been updated');
         } catch (\Exception $e) {
-            return $e->getMessage();
+            return redirect()->back()->with('failure', $e->getMessage());
         }
     }
 

@@ -29,7 +29,8 @@
     "psr-4": {
       "App\\": "app/",
       "Sync\\HasMany\\": "app/src/sync-hasmany",
-      "Uploading\\Image\\": "app/src/uploading-image"
+      "Uploading\\Image\\": "app/src/uploading-image",
+      "Matrix\\Image\\": "app/src/image"
     },
     "files": [
       "app/helpers.php"
