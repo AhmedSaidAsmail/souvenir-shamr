@@ -12,7 +12,7 @@
       border-radius: 0;
       font-family: @font-Roboto;
       font-size: 17px;
-      text-shadow: 1px 0 1px rgba(0,0,0,.3);
+      text-shadow: 1px 0 1px rgba(0, 0, 0, .3);
     }
   }
   > .card-body {
@@ -36,12 +36,17 @@
           }
         }
         &.actions {
+          white-space: nowrap;
           i {
             font-size: 19px;
           }
           > a {
+            display: inline;
             &.editable {
               color: #2980b9;
+            }
+            &.gallery {
+              color: @color-carrot;
             }
 
           }

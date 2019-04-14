@@ -1,0 +1,45 @@
+@left-nav: 28%;
+@search-nav: 47%;
+@side-menu-width: 25%;
+@side-menu-width-mob: 45%;
+// colors
+@color-clouds: #ecf0f1;
+@color-silver: #bdc3c7;
+@color-midnight-blue: #2c3e50;
+@color-wet-asphalt: #34495e;
+@color-logo-1: #93007b;
+@color-logo-2: #e1005c;
+@color-yellow: #fff200;
+@color-footer: #232f3e;
+// Fonts
+@font-fontAwesome: 'Font Awesome\ 5 Free';
+@font-Mallanna: 'Mallanna', sans-serif;
+@font-Roboto: 'Roboto', sans-serif;
+@font-Raleway: 'Raleway', sans-serif;
+@font-lato: 'Lato', sans-serif;
+@font-poppins: 'Poppins', sans-serif;
+// media vars
+//@max-1190: ~"screen and (max-width:1190px)";
+//@max-1200-min-1020: ~"screen and (max-width: 1200px) and (min-width: 1020px)";
+@max-1220-min-767: ~"screen and (max-width: 1220px) and (min-width: 767px)";
+@max-767: ~"screen and (max-width:767px)";
+// mixins
+.aspect-ration-wrapper(@width,@height) {
+  position: relative;
+  overflow: hidden;
+  height: @height;
+  width: @width;
+}
+
+.aspect-ration() {
+  position: absolute;
+  top: -9999px;
+  bottom: -9999px;
+  left: -9999px;
+  right: -9999px;
+  margin: auto;
+}
+
+//.max-1200-min1020(){
+//@media screen and (max-width: 1200px) and (min-width: 1020px);
+//}

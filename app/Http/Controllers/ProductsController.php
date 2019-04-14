@@ -53,14 +53,8 @@ class ProductsController extends Controller
     {
         $attributes = $request->all()['product'];
         $this->validator($attributes);
-        image($attributes['basic'], 'img', $this->path, function ($file) use (&$attributes) {
-            $file->thumb('thumb', 500)
-                ->upload($attributes['basic']);
-        });
-        multipleImage($attributes['gallery'], 'image', $this->path, function ($file) {
-            $file->thumb('thumb', 500)
-                ->upload();
-            return $file->image_name;
+        uploading($attributes['basic']['img'], $this->path, function ($image) {
+            $image->thumb(250);
         });
         try {
             /**
@@ -69,10 +63,11 @@ class ProductsController extends Controller
             $product = Product::create($attributes['basic']);
             $product->meta()->create($attributes['details']);
             $product->description()->create($attributes['description']);
-            $product->gallery()->createMany($attributes['gallery']);
             $product->filters()->sync($attributes['filters']);
             $product->productFilters()->sync($this->flattenFiltersArray($attributes['filter_items']));
-            return redirect()->route('admin.products.index')->with('success', 'Product has successfully created');
+            return redirect()
+                ->route('admin.gallery.create', ['product_id' => $product->id])
+                ->with('success', 'Product has successfully created');
 
         } catch (\Exception $e) {
             return redirect()->back()->with('failure', $e->getMessage());
@@ -184,8 +179,6 @@ class ProductsController extends Controller
             'filters.*.filter_id' => 'required|integer|exists:filters,id',
             // filter items
             'filter_items.*.*' => 'integer|exists:filter_items,id',
-            // gallery
-            'gallery.*.image' => 'image'
         ])->validate();
 
     }

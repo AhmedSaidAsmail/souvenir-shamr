@@ -1,0 +1,209 @@
+@import "lib";
+
+@color-mob-icon: #f39c12;
+@width-mob-icon: 21px;
+.main-nav {
+  &.lunched {
+
+  }
+  @media @max-767 {
+    position: fixed;
+    top: 0;
+    z-index: 2000;
+    background-color: #ffffff;
+    width: 100%;
+    left: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    transition: left ease .3s;
+    &.lunched {
+      left: @side-menu-width-mob;
+    }
+  }
+  ul.nav {
+    > li.nav-item {
+      @media @max-1220-min-767 {
+        display: none;
+      }
+      @media @max-767 {
+        display: none;
+      }
+      > a {
+        padding: 15px 10px;
+        font-family: @font-lato;
+        font-size: 16px;
+        font-weight: 500;
+        color: #2c3e50;
+      }
+      &.all-categories {
+        font-size: 16px;
+        position: relative;
+        margin-right: 30px;
+        margin-left: 25px;
+        @media @max-1220-min-767 {
+          display: inline-block;
+        }
+        @media @max-767 {
+          display: block;
+          margin-right: 0;
+          margin-left: 0;
+          width: 15%;
+        }
+        > a {
+          @media @max-767 {
+            padding: 10px 0;
+          }
+          > span {
+            > b {
+              font-weight: 900;
+            }
+            @media @max-767 {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+    > li.logo {
+      @media @max-1220-min-767 {
+        display: inline-block;
+      }
+      > a {
+        display: block;
+        padding: 8px 0 0 0;
+      }
+      img {
+        width: 330px;
+      }
+      @media @max-767 {
+        display: none;
+      }
+    }
+    > li.mob-logo {
+      display: none;
+      @media @max-767 {
+        display: inline-block;
+        padding-top: 10px;
+        width: 70%;
+        > a {
+          > img {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+.mob-menu-icon {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  left: calc(100% - 2px);
+  top: 12px;
+  @media @max-767 {
+    position: relative;
+    background-color: @color-clouds;
+    border-radius: 2px;
+    top: 0;
+    left: 0;
+    width: calc(@width-mob-icon + 10px);
+  }
+  > .hamburger {
+    position: absolute;
+    top: calc(50% - 1px);
+    left: 0;
+    width: @width-mob-icon;
+    height: 2px;
+    background-color: @color-mob-icon;
+    transform: translate(0%, 0%);
+    transition: .5s;
+    @media @max-767 {
+      left: 5px;
+    }
+    &:after, &:before {
+      content: '';
+      position: absolute;
+      width: @width-mob-icon;
+      height: 2px;
+      background: @color-mob-icon;
+      transform: translate(0%, 0%);
+      transition: .5s;
+    }
+    &:after {
+      top: -6px;
+    }
+    &:before {
+      top: 6px;
+    }
+  }
+  &.lunched {
+    > .hamburger {
+      background: rgba(0, 0, 0, 0);
+      &:after {
+        top: 0;
+        transform: rotate(135deg);
+      }
+      &:before {
+        top: 0;
+        transform: rotate(45deg);
+      }
+    }
+  }
+}
+
+.side-menu {
+  > ul {
+    > li {
+      > a {
+        display: block;
+        padding: 7px 20px;
+        font-family: @font-lato;
+        text-decoration: none;
+        background-color: rgba(255, 255, 255, .2);
+        color: @color-silver;
+        margin-bottom: 2px;
+        position: relative;
+        font-size: 2.6vmin;
+        &.have-sub {
+          &:before {
+            position: absolute;
+            right: 20px;
+            font-family: @font-fontAwesome;
+            content: '\f078';
+            font-weight: 700;
+            color: @color-silver;
+            transition: all ease .3s;
+          }
+        }
+      }
+      &.lunched {
+        > a.have-sub {
+          &:before {
+            content: '\f077';
+          }
+        }
+      }
+      > ul.sub-menu {
+        position: relative;
+        overflow: hidden;
+        max-height: 0;
+        transition: all ease .7s;
+        > li {
+          > a {
+            display: block;
+            padding: 7px 30px;
+            color: @color-silver;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, .1);
+            font-size: 2.4vmin;
+          }
+        }
+      }
+      &.lunched {
+        > ul.sub-menu {
+          max-height: 1000px;
+        }
+      }
+    }
+  }
+}

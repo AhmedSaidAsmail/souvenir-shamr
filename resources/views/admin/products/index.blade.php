@@ -57,7 +57,12 @@
                                     <a href="{{route('admin.products.edit',['id'=>$product->id])}}" class="editable">
                                         <i class="fas fa-sign-out-alt"></i>
                                     </a>
-                                    <form action="{{route('admin.products.destroy',['id'=>$product->id])}}" method="post"
+                                    <a href="{{route('admin.gallery.create',['product_id'=>$product->id])}}"
+                                       class="gallery">
+                                        <i class="fas fa-images"></i>
+                                    </a>
+                                    <form action="{{route('admin.products.destroy',['id'=>$product->id])}}"
+                                          method="post"
                                           id="delete_row">
                                         {{csrf_field()}}
                                         <input type="hidden" name="_method" value="DELETE">

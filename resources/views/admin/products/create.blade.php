@@ -49,10 +49,6 @@
                                role="tab" aria-controls="nav-filters" aria-selected="false">
                                 Filters
                             </a>
-                            <a class="nav-item nav-link" id="nav-gallery-tab" data-toggle="tab" href="#nav-gallery"
-                               role="tab" aria-controls="nav-gallery" aria-selected="false">
-                                Gallery
-                            </a>
 
                         </div>
                     </nav>
@@ -426,27 +422,6 @@
 
                             </div>
                             {{-- end filters --}}
-                            {{-- home link --}}
-                            <div class="tab-pane fade gallery-wrapper" id="nav-gallery" role="tabpanel"
-                                 aria-labelledby="nav-gallery-tab">
-                                <a href="#" class="btn btn-warning btn-block add-gallery">Add image to gallery</a>
-                                <div class="row single-input" tabindex="0">
-                                    <div class="col-md-9">
-                                        <input type="file" class="form-control" name="product[gallery][0][image]">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <input type="number" class="form-control" name="product[gallery][0][sort_order]"
-                                               min="0" placeholder="Sort order">
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a href="#" class="btn btn-danger remove-gallery">
-                                            <i class="fas fa-times"></i>
-                                        </a>
-                                    </div>
-                                </div>
-
-                            </div>
-                            {{-- end home link --}}
                         </div>
                     </form>
                 </div>
@@ -465,47 +440,6 @@
     @parent
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
-    <script>
-        removeGallery();
-        var content = $('.gallery-wrapper').find('.single-input').html();
-        $("a.add-gallery").click(function (event) {
-            event.preventDefault();
-            var index = galleryIndex();
-            //$(this).closest('.gallery-wrapper').append('<div class="row single-input" tabindex="' + index + '">' + content + '</div>');
-            $(this).closest('.gallery-wrapper').append('<div class="row single-input" tabindex="' + index + '">\n' +
-                '                                    <div class="col-md-9">\n' +
-                '                                        <input type="file" class="form-control" name="product[gallery][' + index + '][image]">\n' +
-                '                                    </div>\n' +
-                '                                    <div class="col-md-2">\n' +
-                '                                        <input type="number" min="0" class="form-control" name="product[gallery][' + index + '][sort_order]"\n' +
-                '                                               placeholder="Sort order">\n' +
-                '                                    </div>\n' +
-                '                                    <div class="col-md-1">\n' +
-                '                                        <a href="#" class="btn btn-danger remove-gallery">\n' +
-                '                                            <i class="fas fa-times"></i>\n' +
-                '                                        </a>\n' +
-                '                                    </div>\n' +
-                '                                </div>');
-            removeGallery();
-        });
-
-        function removeGallery() {
-            $("a.remove-gallery").click(function (event) {
-                event.preventDefault();
-                $(this).closest('.single-input').remove();
-            });
-        }
-
-        function galleryIndex() {
-            var index = 0;
-            $(".single-input").each(function () {
-                if ($(this).attr('tabindex') > index) {
-                    index = $(this).attr('tabindex');
-                }
-            });
-            return parseInt(index) + 1;
-        }
-    </script>
     <script>
         ClassicEditor.create(document.querySelector('#editor'));
         ClassicEditor.create(document.querySelector('#editor_2'));

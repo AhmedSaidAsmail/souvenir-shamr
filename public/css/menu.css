@@ -1,0 +1,193 @@
+@media screen and (max-width:767px) {
+  .main-nav {
+    position: fixed;
+    top: 0;
+    z-index: 2000;
+    background-color: #ffffff;
+    width: 100%;
+    left: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    transition: left ease 0.3s;
+  }
+  .main-nav.lunched {
+    left: 45%;
+  }
+}
+@media screen and (max-width: 1220px) and (min-width: 767px) {
+  .main-nav ul.nav > li.nav-item {
+    display: none;
+  }
+}
+@media screen and (max-width:767px) {
+  .main-nav ul.nav > li.nav-item {
+    display: none;
+  }
+}
+.main-nav ul.nav > li.nav-item > a {
+  padding: 15px 10px;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #2c3e50;
+}
+.main-nav ul.nav > li.nav-item.all-categories {
+  font-size: 16px;
+  position: relative;
+  margin-right: 30px;
+  margin-left: 25px;
+}
+@media screen and (max-width: 1220px) and (min-width: 767px) {
+  .main-nav ul.nav > li.nav-item.all-categories {
+    display: inline-block;
+  }
+}
+@media screen and (max-width:767px) {
+  .main-nav ul.nav > li.nav-item.all-categories {
+    display: block;
+    margin-right: 0;
+    margin-left: 0;
+    width: 15%;
+  }
+}
+@media screen and (max-width:767px) {
+  .main-nav ul.nav > li.nav-item.all-categories > a {
+    padding: 10px 0;
+  }
+}
+.main-nav ul.nav > li.nav-item.all-categories > a > span > b {
+  font-weight: 900;
+}
+@media screen and (max-width:767px) {
+  .main-nav ul.nav > li.nav-item.all-categories > a > span {
+    display: none;
+  }
+}
+@media screen and (max-width: 1220px) and (min-width: 767px) {
+  .main-nav ul.nav > li.logo {
+    display: inline-block;
+  }
+}
+.main-nav ul.nav > li.logo > a {
+  display: block;
+  padding: 8px 0 0 0;
+}
+.main-nav ul.nav > li.logo img {
+  width: 330px;
+}
+@media screen and (max-width:767px) {
+  .main-nav ul.nav > li.logo {
+    display: none;
+  }
+}
+.main-nav ul.nav > li.mob-logo {
+  display: none;
+}
+@media screen and (max-width:767px) {
+  .main-nav ul.nav > li.mob-logo {
+    display: inline-block;
+    padding-top: 10px;
+    width: 70%;
+  }
+  .main-nav ul.nav > li.mob-logo > a > img {
+    width: 100%;
+  }
+}
+.mob-menu-icon {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  left: calc(100% - 2px);
+  top: 12px;
+}
+@media screen and (max-width:767px) {
+  .mob-menu-icon {
+    position: relative;
+    background-color: #ecf0f1;
+    border-radius: 2px;
+    top: 0;
+    left: 0;
+    width: calc(21px + 10px);
+  }
+}
+.mob-menu-icon > .hamburger {
+  position: absolute;
+  top: calc(50% - 1px);
+  left: 0;
+  width: 21px;
+  height: 2px;
+  background-color: #f39c12;
+  transform: translate(0%, 0%);
+  transition: 0.5s;
+}
+@media screen and (max-width:767px) {
+  .mob-menu-icon > .hamburger {
+    left: 5px;
+  }
+}
+.mob-menu-icon > .hamburger:after,
+.mob-menu-icon > .hamburger:before {
+  content: '';
+  position: absolute;
+  width: 21px;
+  height: 2px;
+  background: #f39c12;
+  transform: translate(0%, 0%);
+  transition: 0.5s;
+}
+.mob-menu-icon > .hamburger:after {
+  top: -6px;
+}
+.mob-menu-icon > .hamburger:before {
+  top: 6px;
+}
+.mob-menu-icon.lunched > .hamburger {
+  background: rgba(0, 0, 0, 0);
+}
+.mob-menu-icon.lunched > .hamburger:after {
+  top: 0;
+  transform: rotate(135deg);
+}
+.mob-menu-icon.lunched > .hamburger:before {
+  top: 0;
+  transform: rotate(45deg);
+}
+.side-menu > ul > li > a {
+  display: block;
+  padding: 7px 20px;
+  font-family: 'Lato', sans-serif;
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #bdc3c7;
+  margin-bottom: 2px;
+  position: relative;
+  font-size: 2.6vmin;
+}
+.side-menu > ul > li > a.have-sub:before {
+  position: absolute;
+  right: 20px;
+  font-family: 'Font Awesome\ 5 Free';
+  content: '\f078';
+  font-weight: 700;
+  color: #bdc3c7;
+  transition: all ease 0.3s;
+}
+.side-menu > ul > li.lunched > a.have-sub:before {
+  content: '\f077';
+}
+.side-menu > ul > li > ul.sub-menu {
+  position: relative;
+  overflow: hidden;
+  max-height: 0;
+  transition: all ease 0.7s;
+}
+.side-menu > ul > li > ul.sub-menu > li > a {
+  display: block;
+  padding: 7px 30px;
+  color: #bdc3c7;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 2.4vmin;
+}
+.side-menu > ul > li.lunched > ul.sub-menu {
+  max-height: 1000px;
+}

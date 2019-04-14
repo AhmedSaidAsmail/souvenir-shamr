@@ -1,0 +1,46 @@
+.shop-by {
+  padding-top: 20px;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.shop-by > h2 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  margin-bottom: 20px;
+  font-size: 5vmin;
+}
+.section-category-wrapper {
+  margin-bottom: 25px;
+}
+.section-category-wrapper .section-category-bg {
+  position: relative;
+  overflow: hidden;
+  height: 350px;
+  width: 100%;
+}
+.section-category-wrapper .section-category-bg > a > img {
+  position: absolute;
+  top: -9999px;
+  bottom: -9999px;
+  left: -9999px;
+  right: -9999px;
+  margin: auto;
+  width: 100%;
+  min-height: 100%;
+}
+.section-category-wrapper .section-category-sm {
+  position: relative;
+  overflow: hidden;
+  height: 200px;
+  width: 100%;
+}
+.section-category-wrapper .section-category-sm > a > img {
+  position: absolute;
+  top: -9999px;
+  bottom: -9999px;
+  left: -9999px;
+  right: -9999px;
+  margin: auto;
+  width: 100%;
+  min-height: 100%;
+}

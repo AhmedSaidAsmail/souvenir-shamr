@@ -27,11 +27,20 @@
   font-size: 14px;
   min-width: 70%;
 }
+.data-table-wrapper > .card-body table.table-customized td.actions {
+  white-space: nowrap;
+}
 .data-table-wrapper > .card-body table.table-customized td.actions i {
   font-size: 19px;
 }
+.data-table-wrapper > .card-body table.table-customized td.actions > a {
+  display: inline;
+}
 .data-table-wrapper > .card-body table.table-customized td.actions > a.editable {
   color: #2980b9;
+}
+.data-table-wrapper > .card-body table.table-customized td.actions > a.gallery {
+  color: #e67e22;
 }
 .data-table-wrapper > .card-body table.table-customized td.actions > form {
   display: inline;
