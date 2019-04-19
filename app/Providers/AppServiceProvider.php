@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Section;
+use App\Repositories\LocalizationRepo;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 
@@ -15,6 +17,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        view()->composer('front.layouts._side_nav', function ($view) {
+            $view->with('sideSections', Section::confirmed());
+        });
     }
 
     /**
@@ -24,6 +29,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton('localization.repo', function ($app) {
+
+            return new LocalizationRepo($app->make('request'));
+        });
     }
 }

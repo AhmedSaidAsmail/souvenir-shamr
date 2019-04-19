@@ -1,19 +1,5 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return "welcome";
-});
+Route::get('/', ['middleware' => 'lang', 'uses' => 'FrontEndController@index'])->name('home');
 
 // Admin
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('admin.login');
@@ -32,4 +18,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:web', 'as' => 'admin.']
     Route::get('/products/filters/filter/{id?}/', 'ProductsController@getFilterItems')->name('products.filters.items');
     Route::resource('products', 'ProductsController');
     Route::resource('products/{product_id}/gallery', 'ProductGalleriesController');
+});
+// Frontend
+Route::group(['prefix' => '/{lang}', 'middleware' => 'lang'], function () {
+    Route::get('/', 'FrontEndController@homeWelcome')->name('home.welcome');
 });

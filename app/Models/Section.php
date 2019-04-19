@@ -40,6 +40,22 @@ class Section extends Model
         return !is_null($this->brands()->where('brand_id', $brand_id)->first());
     }
 
+    public function scopeLimited($query, $limit = null)
+    {
+        if (!is_null($limit)) {
+            $query->limit($limit);
+        }
+    }
+
+    public static function confirmed($limit = null)
+    {
+        return (new static)
+            ->where('status', 1)
+            ->limited($limit)
+            ->orderBy('sort_order')
+            ->get();
+    }
+
     public function delete()
     {
         $this->detail()->delete();

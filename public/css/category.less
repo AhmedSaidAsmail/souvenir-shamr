@@ -1,0 +1,243 @@
+@import "lib";
+
+.category-banner {
+  .aspect-ration-wrapper(100%, 250px);
+  > img {
+    .aspect-ration();
+    width: 100%;
+  }
+}
+
+.category-container {
+  width: 100%;
+  background-color: @color-clouds;
+  position: relative;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.category-filter-section {
+  border-bottom: 1px solid @color-silver;
+  margin-bottom: 20px;
+  > h3 {
+    font-family: @font-lato;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    position: relative;
+    display: block;
+    &:after {
+      content: '\f068';
+      cursor: pointer;
+      font-family: @font-fontAwesome;
+      padding-left: 3px;
+      padding-top: 3px;
+      font-size: 12px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      background-color: #ffffff;
+      border: 1px solid @color-silver;
+      border-radius: 4px;
+    }
+  }
+  > .filters-options {
+    font-family: @font-Roboto;
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: @color-asbestos;
+    max-height: 1000px;
+    overflow: hidden;
+    transition: all ease-in-out .3s;
+    & input[type=checkbox] {
+      margin-right: 6px;
+    }
+    > .btn {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+  }
+  &.expended {
+    > h3 {
+      &:after {
+        content: '\f067';
+      }
+    }
+    > .filters-options {
+      max-height: 0;
+    }
+  }
+}
+
+.price-range-inputs {
+  > .col {
+    padding: 0;
+    &:first-child {
+      padding-right: 5px;
+      padding-left: 15px;
+    }
+    &:last-child {
+      padding-left: 5px;
+      padding-right: 15px;
+    }
+    > label {
+      font-size: 12px;
+    }
+    > .form-control {
+      height: 35px;
+      outline: 0;
+      &:focus {
+        outline: 0;
+        box-shadow: none;
+      }
+    }
+  }
+}
+
+#price_from, #price_to {
+  border-radius: 0;
+}
+
+.price-range {
+  margin-top: 15px;
+}
+
+.slider.slider-horizontal {
+  width: 90%;
+  margin-left: 5%;
+  //height: 5px;
+}
+
+.slider.slider-horizontal .slider-track {
+  height: 3px;
+  width: 100%;
+  margin-top: -5px;
+  top: 50%;
+  left: 0;
+}
+
+.slider-track {
+  //background-image: none;
+  background: @color-silver;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.slider-selection {
+  background: @color-asbestos;
+}
+
+.slider-handle {
+  position: absolute;
+  top: -2px;
+  width: 15px;
+  height: 15px;
+  background: @color-wet-asphalt;
+  box-shadow: none;
+  border: 0 solid transparent;
+}
+
+.dir {
+  > li {
+    font-family: @font-lato;
+    margin-right: 10px;
+    font-size: 16px;
+    & span {
+      font-weight: 700;
+    }
+    &:after {
+      content: '\f054';
+      font-family: @font-fontAwesome;
+      font-weight: 700;
+    }
+    &:last-child {
+      &:after {
+        content: '';
+      }
+    }
+  }
+}
+
+.category-list {
+  border: 1px solid @color-silver;
+  border-bottom: 0;
+  margin-top: 20px;
+  width: 100%;
+  > .row {
+    border-bottom: 1px solid @color-silver;
+    margin: 0;
+    > [class^=col] {
+      background-color: #ffffff;
+      border-right: 1px solid @color-silver;
+      &:nth-child(3) {
+        border-right: 0;
+      }
+    }
+  }
+}
+
+.category-product {
+  position: relative;
+  height: 100%;
+  padding-bottom: 100px;
+  > .product-img {
+    .aspect-ration-wrapper(100%, 250px);
+    > img {
+      .aspect-ration();
+      height: 100%;
+    }
+  }
+  > .product-text {
+    font-family: @font-lato;
+    > h2 {
+      font-size: 16px;
+      font-weight: 700;
+    }
+    > .product-footer {
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      width: 100%;
+      & .product-price {
+        font-family: @font-poppins;
+        font-weight: 700;
+        font-size: 17px;
+        color: @color-midnight-blue;
+        position: relative;
+        > .discount-wrapper {
+          position: absolute;
+          bottom: calc(100% + 3px);
+          white-space: nowrap;
+          font-size: 11px;
+          color: @color-silver;
+          font-family: @font-Roboto;
+          font-weight: 500;
+          text-decoration: line-through;
+          > span {
+            position: absolute;
+            left: calc(100% + 7px);
+            background-color: rgba(56, 174, 4, .3);
+            padding: 0 5px;
+            color: rgba(56, 174, 4, 1);
+          }
+        }
+      }
+      & .product-rating {
+        color: #f1c40f;
+        white-space: nowrap;
+        > i {
+          //-webkit-text-stroke-width: 1px;
+          //-webkit-text-stroke-color: #ce9504;
+        }
+      }
+      > a.btn {
+        margin-top: 15px;
+        text-transform: uppercase;
+        font-family: @font-Roboto;
+        font-weight: 500;
+      }
+    }
+  }
+}

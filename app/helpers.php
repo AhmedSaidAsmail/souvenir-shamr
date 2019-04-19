@@ -45,3 +45,9 @@ if (!function_exists('uploadingResolver')) {
         return resolve('matrix.image');
     }
 }
+if (!function_exists('translate')) {
+    function translate($word)
+    {
+        return resolve('localization.repo')->findByWord($word);
+    }
+}
