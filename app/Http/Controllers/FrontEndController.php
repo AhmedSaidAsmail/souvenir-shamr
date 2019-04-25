@@ -22,8 +22,4 @@ class FrontEndController extends Controller
         return view('front.welcome', compact('lang'));
     }
 
-    public function test($lang)
-    {
-        return $lang;
-    }
 }

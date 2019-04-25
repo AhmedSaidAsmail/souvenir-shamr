@@ -139,7 +139,7 @@ class Image
      * @param $current_image
      * @return $this
      */
-    public function setCurrent($current_image)
+    public function setCurrent($current_image=null)
     {
         $this->current = $current_image;
         return $this;

@@ -53,7 +53,8 @@
 
                         </div>
                     </nav>
-                    <form method="post" id="basic_form" action="{{route('admin.categories.store')}}">
+                    <form method="post" id="basic_form" action="{{route('admin.categories.store')}}"
+                          enctype="multipart/form-data">
                         {{csrf_field()}}
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-category-basic" role="tabpanel"
@@ -159,6 +160,15 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
+                                            <label>Recommended</label>
+                                            <select class="form-control" name="category[basic][recommended]">
+                                                <option value="0">not recommended</option>
+                                                <option value="1">recommended</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
                                             <label>Home shortcut</label>
                                             <select class="form-control" name="category[basic][home]">
                                                 <option value="1" selected>Confirmed</option>
@@ -171,6 +181,29 @@
                                             <label>Home sort order</label>
                                             <input type="number" class="form-control"
                                                    name="category[basic][home_sort_order]" value="0">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Image ( 650 x 390 )</label>
+                                            <input type="file" class="form-control" name="category[basic][image]"
+                                                   required>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Banner Image ( 1350 x 325 )</label>
+                                            <input type="file" class="form-control"
+                                                   name="category[basic][banner_image]">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Welcome Image ( 1350 x 150 )</label>
+                                            <input type="file" class="form-control"
+                                                   name="category[basic][welcome_image]">
                                         </div>
                                     </div>
                                 </div>
@@ -423,7 +456,7 @@
     <script>
         var section_input = $("#section_input");
         var parent_input = $("#parent_input");
-        var brands_area=$("#brands_area");
+        var brands_area = $("#brands_area");
         var brands_val = $("#brands_val");
 
         function getBrands() {

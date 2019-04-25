@@ -54,7 +54,8 @@
                         </div>
                     </nav>
                     <form method="post" id="basic_form"
-                          action="{{route('admin.categories.update',['id'=>$category->id])}}">
+                          action="{{route('admin.categories.update',['id'=>$category->id])}}"
+                          enctype="multipart/form-data">
                         {{csrf_field()}}
                         <input type="hidden" name="_method" value="PUT">
                         <div class="tab-content" id="nav-tabContent">
@@ -163,6 +164,17 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
+                                            <label>Recommended</label>
+                                            <select class="form-control" name="category[basic][recommended]">
+                                                <option value="0">not recommended</option>
+                                                <option value="1" {{$category->recommended?"selected":null}}>
+                                                    recommended
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
                                             <label>Home shortcut</label>
                                             <select class="form-control" name="category[basic][home]">
                                                 <option value="1">Confirmed</option>
@@ -176,6 +188,28 @@
                                             <input type="number" class="form-control"
                                                    name="category[basic][home_sort_order]"
                                                    value="{{$category->home_sort_order}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Image ( 650 x 390 )</label>
+                                            <input type="file" class="form-control" name="category[basic][image]">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Banner Image ( 1350 x 325 )</label>
+                                            <input type="file" class="form-control"
+                                                   name="category[basic][banner_image]">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Welcome Image ( 1350 x 150 )</label>
+                                            <input type="file" class="form-control"
+                                                   name="category[basic][welcome_image]">
                                         </div>
                                     </div>
                                 </div>

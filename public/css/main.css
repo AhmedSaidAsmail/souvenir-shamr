@@ -160,7 +160,8 @@ a {
 }
 .banner .carousel-control-next,
 .banner .carousel-control-prev {
-  top: -250px;
+  top: calc(50% - 22vh);
+  bottom: inherit;
 }
 @media screen and (max-width:767px) {
   .banner {
@@ -454,6 +455,7 @@ a {
 }
 .product-list .products {
   border: 1px solid #bdc3c7;
+  height: 100%;
 }
 @media screen and (max-width:767px) {
   .product-list .products {
@@ -466,6 +468,7 @@ a {
   overflow: hidden;
   height: 200px;
   width: 100%;
+  background-color: #ffffff;
 }
 @media screen and (max-width:767px) {
   .product-list .products > .product-img {
@@ -479,7 +482,8 @@ a {
   left: -9999px;
   right: -9999px;
   margin: auto;
-  height: 100%;
+  max-width: 90%;
+  max-height: 90%;
 }
 @media screen and (max-width:767px) {
   .product-list .products > .product-img > img {
@@ -601,7 +605,7 @@ a {
     height: 9vh;
   }
 }
-.category-holder > img {
+.category-holder img {
   position: absolute;
   top: -9999px;
   bottom: -9999px;
@@ -611,7 +615,7 @@ a {
   width: 100%;
 }
 @media screen and (max-width:767px) {
-  .category-holder > img {
+  .category-holder img {
     height: 100%;
     width: auto;
     min-width: 100%;

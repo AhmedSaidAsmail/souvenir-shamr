@@ -5,30 +5,32 @@
         </li>
         @foreach($sideSections as $section)
             <li class="menu-item">
-                <a href="" class="have-sub">{{$section->en_name}}</a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="">Gift Sets</a>
-                    </li>
-                    <li>
-                        <a href="">Perfume For Her</a>
-                    </li>
-                    <li>
-                        <a href="">Perfume For Him</a>
-                    </li>
-                    <li>
-                        <a href="">Make up</a>
-                    </li>
-                    <li>
-                        <a href="">Bath & Body</a>
-                    </li>
-                    <li>
-                        <a href="">Gift Sets</a>
-                    </li>
-                    <li>
-                        <a href="">Perfume For Her</a>
-                    </li>
-                </ul>
+                <?php
+                $hasCategories = !empty($section->confirmedCategories()) ? true : false;
+                $section_parameters = [
+                    'lang' => $lang,
+                    'section_name' => translateModel($section, 'name'),
+                    'id' => $section->id];
+                ?>
+                <a href="{{route('home.section',$section_parameters)}}" {!! $hasCategories?'class="have-sub"':null !!}>
+                    {{translateModel($section,'name')}}
+                </a>
+                @if($categories=$section->confirmedCategories())
+                    <ul class="sub-menu">
+                        @foreach($categories as $category)
+                            <?php
+                            $category_parameters = [
+                                'lang' => $lang,
+                                'category_name' => translateModel($category,'name'),
+                                'id' => $category->id
+                            ]
+                            ?>
+                            <li>
+                                <a href="{{route('home.category',$category_parameters)}}">{{translateModel($category,'name')}}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
             </li>
         @endforeach
     </ul>

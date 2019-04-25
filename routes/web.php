@@ -22,4 +22,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:web', 'as' => 'admin.']
 // Frontend
 Route::group(['prefix' => '/{lang}', 'middleware' => 'lang'], function () {
     Route::get('/', 'FrontEndController@homeWelcome')->name('home.welcome');
+    Route::get('/s/{section_name}/{id}','SectionsController@show')->name('home.section');
+    Route::get('/c/{name}/{id}','CategoriesController@show')->name('home.category');
 });

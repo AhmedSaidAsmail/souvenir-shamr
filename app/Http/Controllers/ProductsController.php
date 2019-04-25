@@ -156,7 +156,7 @@ class ProductsController extends Controller
             'basic.quantity' => 'required|integer|min:1',
             'basic.min_quantity' => 'required|integer',
             'basic.date_available' => 'required|date',
-            'basic.img' => 'required|image',
+            'basic.img' => 'image',
             // Meta tags
             'details.en_meta_title' => 'required|string',
             'details.ar_meta_title' => 'required|string',

@@ -15,4 +15,9 @@ class FilterItem extends Model
     {
         return $this->belongsToMany(Product::class, 'product_filter_items');
     }
+
+    public function filter()
+    {
+        return $this->belongsTo(Filter::class);
+    }
 }

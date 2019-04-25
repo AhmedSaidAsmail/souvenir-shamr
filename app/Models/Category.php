@@ -17,11 +17,20 @@ class Category extends Model
         'status',
         'home',
         'home_sort_order',
+        'image',
+        'banner_image',
+        'recommended',
+        'welcome_image',
     ];
 
     public function section()
     {
         return $this->belongsTo(Section::class);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 
     public function children()
@@ -112,5 +121,28 @@ class Category extends Model
     private static function joinName(array $name, $separating)
     {
         return implode($separating, array_reverse($name));
+    }
+
+    public static function recommendationCategories()
+    {
+        return (new static)
+            ->where('recommended', 1)
+            ->where('image', '!=', '')
+            ->orderBy('sort_order')
+            ->limit(3)
+            ->get()
+            ->all();
+    }
+
+    public static function homeCategories()
+    {
+        return (new static)
+            ->where('status', 1)
+            ->where('home', 1)
+            ->where('welcome_image', '!=', '')
+            ->orderBy('home_sort_order')
+            ->limit(2)
+            ->get()
+            ->all();
     }
 }

@@ -6,12 +6,16 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Filter;
 use App\Models\Section;
+use App\Repositories\Category\Categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use App\Repositories\CategoryRepo;
 
 class CategoriesController extends Controller
 {
+    private $path = "/images/categories/";
+
     /**
      * Display a listing of the resource.
      *
@@ -48,10 +52,17 @@ class CategoriesController extends Controller
         $attributes = $request->all()['category'];
         $this->prepareSection($attributes);
         $this->validator($attributes);
+        image($attributes['basic'], 'image', $this->path, function ($file) use (&$data) {
+            $file->upload($data['basic']);
+        });
+        uploading($attributes['basic']['banner_image'], $this->path);
+        image($attributes['basic'], 'welcome_image', $this->path, function ($file) use (&$data) {
+            $file->upload($data['basic']);
+        });
         try {
             $category = Category::create($attributes['basic']);
             $category->detail()->create($attributes['details']);
-            $category->syncLink($attributes['link']);
+//            $category->syncLink($attributes['link']);
             $category->brands()->sync($attributes['brands']);
             $category->filters()->sync($attributes['filters']);
             return redirect()->route('admin.categories.index')->with('success', 'Category has been inserted');
@@ -64,12 +75,31 @@ class CategoriesController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param Request $request
+     * @param string $lang
+     * @param string $name
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $lang, $name, $id)
     {
-        //
+//        $category = Category::FindOrFail($id);
+//        $repo = new CategoryRepo($category, $request);
+//        $repo->find($id,$request);
+        $category = Categories::find($request, $id);
+        dd($category->brands());
+//        $test = [
+//          'child'=>$category->childs(),
+//            'products' => $category->products(),
+//            'filters' => $category->filters(),
+//            'brands'=>$category->brands()
+//        ];
+//        dd($test);
+//        // foreach ($category->childs() as $child){
+//        //  print_r($child->count());
+//        // }
+//        //dd($category->products()->count());
+        return view('front.category', compact('lang', 'name', 'category'));
     }
 
     /**
@@ -105,11 +135,26 @@ class CategoriesController extends Controller
         $attributes = $request->all()['category'];
         $this->prepareSection($attributes);
         $this->validator($attributes, $category->id);
+        if (isset($attributes['basic']['image'])) {
+            uploading($attributes['basic']['image'], $this->path, function ($image) use ($category) {
+                $image->current($category->image);
+            });
+        }
+        if (isset($attributes['basic']['banner_image'])) {
+            uploading($attributes['basic']['banner_image'], $this->path, function ($image) use ($category) {
+                $image->current($category->banner_image);
+            });
+        }
+        if (isset($attributes['basic']['welcome_image'])) {
+            uploading($attributes['basic']['welcome_image'], $this->path, function ($image) use ($category) {
+                $image->current($category->welcome_image);
+            });
+        }
         try {
             $this->sectionUpdate($category, $attributes['basic']);
             $category->update($attributes['basic']);
             $category->detail()->create($attributes['details']);
-            $category->syncLink($attributes['link']);
+//            $category->syncLink($attributes['link']);
             $category->brands()->sync($attributes['brands']);
             $category->filters()->sync($attributes['filters']);
             return redirect()->route('admin.categories.index')->with('success', 'Category has been updated');
@@ -175,6 +220,10 @@ class CategoriesController extends Controller
             'basic.sort_order' => 'required|integer',
             'basic.home' => 'required|boolean',
             'basic.home_sort_order' => 'required|integer',
+            'basic.recommended' => 'required|boolean',
+            'basic.image' => 'image|nullable',
+            'basic.welcome_image' => 'image|nullable',
+            'basic.banner_image' => 'sometimes|required|image',
             // Meta tags
             'details.en_meta_title' => 'required|string',
             'details.ar_meta_title' => 'required|string',
@@ -196,9 +245,9 @@ class CategoriesController extends Controller
             //Filters
             'filters.*' => 'required_without:basic.parent_id|integer|exists:filters,id',
             // links
-            'link.header_1' => 'string',
-            'link.header_2' => 'string',
-            'link.link' => 'string',
+//            'link.header_1' => 'string|nullable',
+//            'link.header_2' => 'string|nullable',
+//            'link.link' => 'string|nullable',
         ])->validate();
 
     }

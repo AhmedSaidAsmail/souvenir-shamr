@@ -52,7 +52,7 @@ class RemovingImage
 
     private function currentIsExists()
     {
-        return file_exists($this->currentImage());
+        return file_exists($this->currentImage()) && is_file($this->currentImage());
     }
 
     /**

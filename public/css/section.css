@@ -1,3 +1,18 @@
+.section-banner {
+  position: relative;
+  overflow: hidden;
+  height: 300px;
+  width: 100%;
+}
+.section-banner > img {
+  position: absolute;
+  top: -9999px;
+  bottom: -9999px;
+  left: -9999px;
+  right: -9999px;
+  margin: auto;
+  width: 100%;
+}
 .shop-by {
   padding-top: 20px;
   margin-right: -15px;
@@ -29,18 +44,12 @@
   min-height: 100%;
 }
 .section-category-wrapper .section-category-sm {
-  position: relative;
-  overflow: hidden;
-  height: 200px;
   width: 100%;
+  height: 100%;
+  background-color: #e67e22;
+  overflow: hidden;
 }
-.section-category-wrapper .section-category-sm > a > img {
-  position: absolute;
-  top: -9999px;
-  bottom: -9999px;
-  left: -9999px;
-  right: -9999px;
-  margin: auto;
+.section-category-wrapper .section-category-sm img {
   width: 100%;
   min-height: 100%;
 }

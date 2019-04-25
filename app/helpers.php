@@ -51,3 +51,9 @@ if (!function_exists('translate')) {
         return resolve('localization.repo')->findByWord($word);
     }
 }
+if (!function_exists('translateModel')) {
+    function translateModel($model, $field)
+    {
+        return resolve('localization.model')->translate($model, $field);
+    }
+}

@@ -2,19 +2,10 @@
 
 namespace App\Repositories;
 
-use Illuminate\Http\Request;
-use App\Models\Localization;
+use App\Models\Localization as LocalizationModel;
 
-class LocalizationRepo
+class LocalizationRepo extends Localization
 {
-    const default_lang = "en";
-    private $request;
-
-
-    public function __construct(Request $request)
-    {
-        $this->request = $request;
-    }
 
     /**
      * Translate word if exists in localization table
@@ -24,23 +15,16 @@ class LocalizationRepo
      */
     public function findByWord($word)
     {
-        $trans = Localization::where('word', $word)->first();
+        $fixed_word = $this->replaceSpaces($word);
+        $trans = LocalizationModel::where('word', $fixed_word)->first();
         if (!is_null($trans)) {
             return $trans->{'word_' . $this->currentLanguage()};
         }
         return $word;
     }
 
-    /**
-     * Determine what language is used
-     *
-     * @return string
-     */
-    private function currentLanguage()
+    private function replaceSpaces($word)
     {
-        if ($this->request->session()->has('lang')) {
-            return $this->request->session()->get('lang');
-        }
-        return self::default_lang;
+        return str_replace(' ', '_', strtolower($word));
     }
 }

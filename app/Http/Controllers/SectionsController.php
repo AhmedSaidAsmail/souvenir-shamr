@@ -49,13 +49,14 @@ class SectionsController extends Controller
     {
         $data = $request->all()['section'];
         $this->validator($data);
-        image($data['basic'], 'banner_img', $this->path, function ($file) use (&$data) {
-            $file->upload($data['basic']);
-        });
-        image($data['basic'], 'home_img', $this->path, function ($file) use (&$data) {
-            $file->thumb('thumb', 500)
-                ->upload($data['basic']);
-        });
+        uploading($data['basic']['banner_img'], $this->path);
+//        image($data['basic'], 'banner_img', $this->path, function ($file) use (&$data) {
+//            $file->upload($data['basic']);
+//        });
+//        image($data['basic'], 'home_img', $this->path, function ($file) use (&$data) {
+//            $file->thumb('thumb', 500)
+//                ->upload($data['basic']);
+//        });
         try {
 
             $section = Section::create($data['basic']);
@@ -70,12 +71,15 @@ class SectionsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param string $lang
+     * @param string $section_name
+     * @param  integer $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($lang,$section_name,$id)
     {
-        //
+        $section=Section::findOrFail($id);
+        return view('front.section',compact('lang','section','section_name'));
     }
 
     /**
@@ -101,15 +105,19 @@ class SectionsController extends Controller
     {
         $attributes = $request->all()['section'];
         $this->validator($attributes);
-        image($attributes['basic'], 'banner_img', $this->path, function ($image) use (&$attributes, $section) {
-            $image->current($section->banner_img)
-                ->upload($attributes['basic']);
+        uploading($attributes['basic']['banner_img'], $this->path, function ($image) use ($section) {
+            $image->current($section->banner_img);
         });
-        image($attributes['basic'], 'home_img', $this->path, function ($image) use (&$attributes, $section) {
-            $image->current($section->home_img)
-                ->thumb('thumb', 500)
-                ->upload($attributes['basic']);
-        });
+//
+//        image($attributes['basic'], 'banner_img', $this->path, function ($image) use (&$attributes, $section) {
+//            $image->current($section->banner_img)
+//                ->upload($attributes['basic']);
+//        });
+//        image($attributes['basic'], 'home_img', $this->path, function ($image) use (&$attributes, $section) {
+//            $image->current($section->home_img)
+//                ->thumb('thumb', 500)
+//                ->upload($attributes['basic']);
+//        });
         try {
 
             $section->update($attributes['basic']);

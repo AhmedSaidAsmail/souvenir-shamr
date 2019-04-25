@@ -34,6 +34,10 @@
                                role="tab" aria-controls="nav-product-basic" aria-selected="true">
                                 Product details
                             </a>
+                            <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+                               role="tab" aria-controls="nav-home" aria-selected="false">
+                                Home Shortcuts
+                            </a>
                             <a class="nav-item nav-link" id="nav-meta-tab" data-toggle="tab" href="#nav-meta"
                                role="tab" aria-controls="nav-meta" aria-selected="false">
                                 Meta Tags
@@ -205,7 +209,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Image</label>
-                                            <input type="file" class="form-control" name="product[basic][img]" required>
+                                            <input type="file" class="form-control" name="product[basic][img]">
                                         </div>
                                     </div>
                                     <div class="col">
@@ -229,6 +233,39 @@
                                             <input value="{{$product->date_available->format('Y-m-d')}}"
                                                    class="form-control" name="product[basic][date_available]"
                                                    dataformatas="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- home shortcuts--}}
+                            <div class="tab-pane fade" id="nav-home" role="tabpanel"
+                                 aria-labelledby="nav-home-tab">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Recommended</label>
+                                            <select class="form-control" name="product[basic][recommended]" required>
+                                                <option value="0">False</option>
+                                                <option value="1" {!! $product->recommended?"selected":null !!}>True</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Most Popular</label>
+                                            <select class="form-control" name="product[basic][popular]" required>
+                                                <option value="0">False</option>
+                                                <option value="1" {!! $product->popular?"selected":null !!}>True</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Top Picks</label>
+                                            <select class="form-control" name="product[basic][top]" required>
+                                                <option value="0">False</option>
+                                                <option value="1" {!! $product->top?"selected":null !!}>True</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

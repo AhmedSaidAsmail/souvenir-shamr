@@ -23,6 +23,9 @@ class Product extends Model
         'min_quantity',
         'shipping',
         'date_available',
+        'recommended',
+        'popular',
+        'top',
     ];
     protected $casts = [
         'date_available' => 'date'
@@ -66,5 +69,41 @@ class Product extends Model
     public function productFilterList()
     {
         return array_column($this->productFilters()->get()->toArray(), 'id');
+    }
+
+    /**
+     * @param * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param $field
+     * @param string|null $table
+     */
+    public function scopeHome($query, $field, $table = null)
+    {
+        $query->where($table . $field, 1)
+            ->where($table . 'status', 1)
+            ->orderBy($table . 'sort_order');
+    }
+
+    public static function recommendationProducts()
+    {
+        return (new static)
+            ->home('recommended')
+            ->get()
+            ->all();
+    }
+
+    public static function popularProducts()
+    {
+        return (new static)
+            ->home('popular')
+            ->get()
+            ->all();
+    }
+
+    public static function topProducts()
+    {
+        return (new static)
+            ->home('top')
+            ->get()
+            ->all();
     }
 }

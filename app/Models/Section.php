@@ -30,6 +30,25 @@ class Section extends Model
         return $this->hasOne(SectionDetail::class);
     }
 
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
+
+    public function products()
+    {
+        return $this->hasManyThrough(Product::class, Category::class);
+    }
+
+    public function confirmedCategories()
+    {
+        return $this->categories()
+            ->where('status', 1)
+            ->orderBy('sort_order')
+            ->get()
+            ->all();
+    }
+
     public function brands()
     {
         return $this->belongsToMany(Brand::class);
