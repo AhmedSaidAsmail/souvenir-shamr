@@ -94,16 +94,53 @@ class QueryFactory
     {
         switch (true) {
             case !is_null($categories):
-                return new Query(array($categories), $this->requestedBrand(), $this->requestedFilters(), $this->requestedMinPrice(), $this->requestedMaxPrice());
+                return $this->queryInstance($this->requestedArgument('categories', [$categories]));
             case !is_null($brand):
-                return new Query($this->allCategoriesId(), $brand, $this->requestedFilters(), $this->requestedMinPrice(), $this->requestedMaxPrice());
+                return $this->queryInstance($this->requestedArgument('brand', $brand));
             case !is_null($filter):
-                return new Query($this->allCategoriesId(), $this->requestedBrand(), array($filter), $this->requestedMinPrice(), $this->requestedMaxPrice());
+                return $this->queryInstance($this->requestedArgument('filters', array($filter)));
             default:
-                return new Query($this->allCategoriesId(), $this->requestedBrand(), $this->requestedFilters(), $this->requestedMinPrice(), $this->requestedMaxPrice());
+                return $this->queryInstance($this->defaultArguments());
 
         }
 
+    }
+
+    /**
+     * @param $arguments
+     * @return Query
+     */
+    private function queryInstance($arguments)
+    {
+        return call_user_func_array([__NAMESPACE__ . '\Query', 'newInstance'], $arguments);
+    }
+
+    /**
+     * Replacing default arguments with specified key value
+     *
+     * @param $key
+     * @param $value
+     * @return array
+     */
+    private function requestedArgument($key, $value)
+    {
+        return array_replace($this->defaultArguments(), [$key => $value]);
+    }
+
+    /**
+     * Returning default query arguments
+     *
+     * @return array
+     */
+    private function defaultArguments()
+    {
+        return [
+            'categories' => $this->allCategoriesId(),
+            'brand' => $this->requestedBrand(),
+            'filters' => $this->requestedFilters(),
+            'min_price' => $this->requestedMinPrice(),
+            'max_price' => $this->requestedMaxPrice()
+        ];
     }
 
     /**

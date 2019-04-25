@@ -87,12 +87,14 @@ class CategoriesController extends Controller
 //        $repo = new CategoryRepo($category, $request);
 //        $repo->find($id,$request);
         $category = Categories::find($request, $id);
-        dd($category->brands());
+       // dd($category->brands());
 //        $test = [
 //          'child'=>$category->childs(),
 //            'products' => $category->products(),
 //            'filters' => $category->filters(),
-//            'brands'=>$category->brands()
+//            'brands'=>$category->brands(),
+//            'max_price'=>$category->price()->max(),
+//            'min_price'=>$category->price()->min(),
 //        ];
 //        dd($test);
 //        // foreach ($category->childs() as $child){

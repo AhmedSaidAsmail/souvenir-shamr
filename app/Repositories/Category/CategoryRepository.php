@@ -2,9 +2,14 @@
 
 namespace App\Repositories\Category;
 
+use App\Repositories\Category\Relations\BrandsCollection;
+use App\Repositories\Category\Relations\ChildsCollection;
+use App\Repositories\Category\Relations\FiltersCollection;
+use App\Repositories\Category\Relations\Price;
+use App\Repositories\Category\Relations\ProductsCollection;
 use Illuminate\Http\Request;
 use App\Models\Category;
-use Illuminate\Support\Facades\DB;
+use App\Repositories\Category\Query\QueryFactory;
 
 class CategoryRepository
 {
@@ -20,10 +25,6 @@ class CategoryRepository
      * @var Category[] $categories
      */
     public $categories = [];
-    /**
-     * @var \Illuminate\Database\Query\Builder
-     */
-    private $query;
 
     public function __construct(Request $request, $id)
     {
@@ -106,56 +107,41 @@ class CategoryRepository
 
     public function products($limit = null, $offset = null)
     {
-        return (new Products($this->newQueryInstance()))->get($limit, $offset);
+//        return (new Products($this->newQueryInstance()))->get($limit, $offset);
+        return (new ProductsCollection($this->newQueryFactoryInstance()))
+            ->get($limit, $offset);
     }
 
     public function filters()
     {
-        return (new Filters($this->newQueryInstance()))->get();
+        return (new FiltersCollection($this->newQueryFactoryInstance()))
+            ->get();
     }
 
     public function brands()
     {
-        return (new Brands($this->newQueryInstance()))->get();
+//        return (new Brands($this->newQueryInstance()))->get();
+        return (new BrandsCollection($this->newQueryFactoryInstance()))
+            ->get();
     }
 
     public function childs()
     {
-        return (new Childs($this->categories, $this->newQueryInstance()))->get();
-
-//        return $this->query
-//            ->select('products.id')
-//            ->distinct('products.id')
-//            ->where('categories.id', '=', 7)
-//            ->get()
-//            ->count();
-
-////        return (new QueryFactory($this))
-////            ->makeQuery(4)
-////            ->select('products.id')
-////            ->distinct('products.id')
-////            ->get()
-////            ->count();
-//        return $this->query
-//            ->select('products.id')
-//            ->distinct('products.id')
-//            ->where('categories.id', '=', 7)
-////            ->select('categories.id', 'products.id as product', DB::raw('count(products.id) as count'))
-////            ->distinct('products.id')
-////            //->distinct('product_id')
-////            ->groupBy('categories.id')
-////            ->groupBy('products.id')
-//////            ->select('categories.id','products.id as product',DB::raw('count(products.id) as count'))
-//////            ->groupBy('products.id')
-////////            ->select('categories.id',DB::raw('count(products.id) as count'))
-//////            ->groupBy('categories.id')
-//            ->get()
-//            ->count();
+        return (new ChildsCollection($this->newQueryFactoryInstance(), $this->categories))
+            ->get();
+    }
+    public function price(){
+        return new Price($this->newQueryFactoryInstance());
     }
 
     private function newQueryInstance()
     {
         return (new QueryFactory($this))->makeQuery();
+    }
+
+    private function newQueryFactoryInstance()
+    {
+        return new QueryFactory($this);
     }
 
     public function __get($name)

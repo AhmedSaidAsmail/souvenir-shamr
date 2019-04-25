@@ -52,7 +52,7 @@
                                     <div class="checkbox">
                                         <label>
                                             <input type="checkbox" name="brands[]" value="1">
-                                            {{translateModel($brand,'name')}}<span>({{$brand->count}})</span>
+                                            {{translateModel($brand(),'name')}}<span>({{$brand->count()}})</span>
                                         </label>
                                     </div>
                                 @endforeach
@@ -122,16 +122,16 @@
                                 <div class="row price-range-inputs">
                                     <div class="col">
                                         <label>From (USD)</label>
-                                        <input class="form-control" id="price_from" name="" value="">
+                                        <input class="form-control" id="price_from" name="" value="{{$category->price()->min()}}">
                                     </div>
                                     <div class="col">
                                         <label>To (USD)</label>
-                                        <input class="form-control" id="price_to" name="" value="">
+                                        <input class="form-control" id="price_to" name="" value="{{$category->price()->max()}}">
                                     </div>
                                 </div>
                                 <div class="price-range">
-                                    <input id="ex2" type="text" class="span2" value="" data-slider-min="0"
-                                           data-slider-max="1000" data-slider-step="5" data-slider-value="[0,1000]">
+                                    <input id="ex2" type="text" class="span2" value="" data-slider-min="{{$category->price()->min()}}"
+                                           data-slider-max="{{$category->price()->max()}}" data-slider-step="5" data-slider-value="[{{$category->price()->min()}},{{$category->price()->max()}}]">
                                 </div>
                                 <button class="btn btn-warning btn-block">Apply</button>
                             </div>
