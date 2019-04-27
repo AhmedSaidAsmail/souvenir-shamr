@@ -1,27 +1,71 @@
 @import "lib";
 
+@categories-border: @color-city-light;
 .category-banner {
   .aspect-ration-wrapper(100%, 250px);
+  border-bottom: 7px solid @color-yellow;
   > img {
     .aspect-ration();
     width: 100%;
   }
 }
+.loading-category-filters{
+  width: 100%;
+  height: 300px;
+  background-color: #fafafa;
+  background-image: url("../images/loading.gif");
+  background-position: center -100px;
+  background-size: auto 150%;
+  background-repeat: no-repeat;
+  display: none;
 
+}
 .category-container {
   width: 100%;
-  background-color: @color-clouds;
+  background-color: #fafafa;
   position: relative;
-  padding-top: 40px;
+  padding-top: 10px;
   padding-bottom: 40px;
 }
 
+.category-dir {
+  font-family: @font-poppins;
+  font-weight: 300;
+  margin-bottom: 20px;
+  text-transform: capitalize;
+  font-size: 13px;
+  & > li {
+    position: relative;
+    padding-right: 20px;
+    &:after {
+      content: '\f054';
+      font-family: @font-fontAwesome;
+      font-weight: 700;
+      position: absolute;
+      color: #a4b0be;
+      top: 2px;
+      right: 7px;
+      font-size: 10px;
+    }
+    &:last-child {
+      font-weight: 500;
+      font-size: 14px;
+      &:after {
+        content: '';
+      }
+    }
+  }
+}
+
+.filter-column {
+}
+
 .category-filter-section {
-  border-bottom: 1px solid @color-silver;
+  border-bottom: 1px solid @color-city-light;
   margin-bottom: 20px;
   > h3 {
     font-family: @font-lato;
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 700;
     margin-bottom: 20px;
     position: relative;
@@ -46,8 +90,10 @@
   > .filters-options {
     font-family: @font-Roboto;
     font-size: 14px;
+    text-transform: capitalize;
     margin-bottom: 10px;
-    color: @color-asbestos;
+    color: @color-wet-asphalt;
+    font-weight: 500;
     max-height: 1000px;
     overflow: hidden;
     transition: all ease-in-out .3s;
@@ -160,18 +206,27 @@
   }
 }
 
+.category-result-header {
+  font-family: @font-lato;
+  font-size: 17px;
+  font-weight: 300;
+  > span {
+    font-weight: 700;
+  }
+}
+
 .category-list {
-  border: 1px solid @color-silver;
+  border: 1px solid @categories-border;
   border-bottom: 0;
   margin-top: 20px;
   width: 100%;
   > .row {
-    border-bottom: 1px solid @color-silver;
+    border-bottom: 1px solid @categories-border;
     margin: 0;
     > [class^=col] {
       background-color: #ffffff;
-      border-right: 1px solid @color-silver;
-      &:nth-child(3) {
+      border-right: 1px solid @categories-border;
+      &:nth-child(4) {
         border-right: 0;
       }
     }
@@ -186,14 +241,19 @@
     .aspect-ration-wrapper(100%, 250px);
     > img {
       .aspect-ration();
-      height: 100%;
+      max-width: 100%;
+      max-height: 80%;
     }
   }
   > .product-text {
     font-family: @font-lato;
     > h2 {
-      font-size: 16px;
-      font-weight: 700;
+      font-family: @font-poppins;
+      font-size: 15px;
+      color: @color-footer;
+      font-weight: 500;
+      height: 60px;
+      //background-color: #e67e22;
     }
     > .product-footer {
       position: absolute;
@@ -206,6 +266,7 @@
         font-size: 17px;
         color: @color-midnight-blue;
         position: relative;
+        white-space: nowrap;
         > .discount-wrapper {
           position: absolute;
           bottom: calc(100% + 3px);
@@ -224,20 +285,45 @@
           }
         }
       }
-      & .product-rating {
-        color: #f1c40f;
-        white-space: nowrap;
-        > i {
-          //-webkit-text-stroke-width: 1px;
-          //-webkit-text-stroke-color: #ce9504;
-        }
-      }
       > a.btn {
         margin-top: 15px;
         text-transform: uppercase;
-        font-family: @font-Roboto;
-        font-weight: 500;
+        font-family: @font-Raleway;
+        font-weight: 700;
+        //background-color: #91ce3f;
+        //background-image: -webkit-linear-gradient(top, #91ce3f, #87af40);
+        //color: #ffffff;
+        //border-color: #90cd3f;
+        border: 1px solid @color-electron-blue;
+        color: @color-electron-blue;
+        border-radius: 0;
       }
+    }
+  }
+}
+
+.stars-outer {
+  position: relative;
+  display: inline-block;
+  font-family: @font-fontAwesome;
+  color: @color-midnight-blue;
+  z-index: 2;
+  &:before {
+    content: "\f005 \f005 \f005 \f005 \f005";
+  }
+  & > .stars-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: -1;
+    &:before {
+      content: "\f005 \f005 \f005 \f005 \f005";
+      font-weight: 900;
+      color: #fed330;
+
     }
   }
 }

@@ -3,6 +3,7 @@
   overflow: hidden;
   height: 250px;
   width: 100%;
+  border-bottom: 7px solid #fff200;
 }
 .category-banner > img {
   position: absolute;
@@ -13,20 +14,58 @@
   margin: auto;
   width: 100%;
 }
+.loading-category-filters {
+  width: 100%;
+  height: 300px;
+  background-color: #fafafa;
+  background-image: url("../images/loading.gif");
+  background-position: center -100px;
+  background-size: auto 150%;
+  background-repeat: no-repeat;
+  display: none;
+}
 .category-container {
   width: 100%;
-  background-color: #ecf0f1;
+  background-color: #fafafa;
   position: relative;
-  padding-top: 40px;
+  padding-top: 10px;
   padding-bottom: 40px;
 }
+.category-dir {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  margin-bottom: 20px;
+  text-transform: capitalize;
+  font-size: 13px;
+}
+.category-dir > li {
+  position: relative;
+  padding-right: 20px;
+}
+.category-dir > li:after {
+  content: '\f054';
+  font-family: 'Font Awesome\ 5 Free';
+  font-weight: 700;
+  position: absolute;
+  color: #a4b0be;
+  top: 2px;
+  right: 7px;
+  font-size: 10px;
+}
+.category-dir > li:last-child {
+  font-weight: 500;
+  font-size: 14px;
+}
+.category-dir > li:last-child:after {
+  content: '';
+}
 .category-filter-section {
-  border-bottom: 1px solid #bdc3c7;
+  border-bottom: 1px solid #dfe4ea;
   margin-bottom: 20px;
 }
 .category-filter-section > h3 {
   font-family: 'Lato', sans-serif;
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 700;
   margin-bottom: 20px;
   position: relative;
@@ -51,8 +90,10 @@
 .category-filter-section > .filters-options {
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
+  text-transform: capitalize;
   margin-bottom: 10px;
-  color: #7f8c8d;
+  color: #34495e;
+  font-weight: 500;
   max-height: 1000px;
   overflow: hidden;
   transition: all ease-in-out 0.3s;
@@ -143,21 +184,29 @@
 .dir > li:last-child:after {
   content: '';
 }
+.category-result-header {
+  font-family: 'Lato', sans-serif;
+  font-size: 17px;
+  font-weight: 300;
+}
+.category-result-header > span {
+  font-weight: 700;
+}
 .category-list {
-  border: 1px solid #bdc3c7;
+  border: 1px solid #dfe4ea;
   border-bottom: 0;
   margin-top: 20px;
   width: 100%;
 }
 .category-list > .row {
-  border-bottom: 1px solid #bdc3c7;
+  border-bottom: 1px solid #dfe4ea;
   margin: 0;
 }
 .category-list > .row > [class^=col] {
   background-color: #ffffff;
-  border-right: 1px solid #bdc3c7;
+  border-right: 1px solid #dfe4ea;
 }
-.category-list > .row > [class^=col]:nth-child(3) {
+.category-list > .row > [class^=col]:nth-child(4) {
   border-right: 0;
 }
 .category-product {
@@ -178,14 +227,18 @@
   left: -9999px;
   right: -9999px;
   margin: auto;
-  height: 100%;
+  max-width: 100%;
+  max-height: 80%;
 }
 .category-product > .product-text {
   font-family: 'Lato', sans-serif;
 }
 .category-product > .product-text > h2 {
-  font-size: 16px;
-  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  color: #232f3e;
+  font-weight: 500;
+  height: 60px;
 }
 .category-product > .product-text > .product-footer {
   position: absolute;
@@ -199,6 +252,7 @@
   font-size: 17px;
   color: #2c3e50;
   position: relative;
+  white-space: nowrap;
 }
 .category-product > .product-text > .product-footer .product-price > .discount-wrapper {
   position: absolute;
@@ -217,13 +271,36 @@
   padding: 0 5px;
   color: #38ae04;
 }
-.category-product > .product-text > .product-footer .product-rating {
-  color: #f1c40f;
-  white-space: nowrap;
-}
 .category-product > .product-text > .product-footer > a.btn {
   margin-top: 15px;
   text-transform: uppercase;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  border: 1px solid #0984e3;
+  color: #0984e3;
+  border-radius: 0;
+}
+.stars-outer {
+  position: relative;
+  display: inline-block;
+  font-family: 'Font Awesome\ 5 Free';
+  color: #2c3e50;
+  z-index: 2;
+}
+.stars-outer:before {
+  content: "\f005 \f005 \f005 \f005 \f005";
+}
+.stars-outer > .stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  z-index: -1;
+}
+.stars-outer > .stars-inner:before {
+  content: "\f005 \f005 \f005 \f005 \f005";
+  font-weight: 900;
+  color: #fed330;
 }

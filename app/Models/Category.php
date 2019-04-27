@@ -108,6 +108,15 @@ class Category extends Model
 
     }
 
+    public function allParents(array $parents = [])
+    {
+        $parents=array_merge($parents, [$this]);
+        if (!is_null($this->parent)) {
+            return $this->parent->allParents($parents);
+        }
+        return collect(array_reverse($parents));
+    }
+
     public function fullName($property, $separating = " > ")
     {
         $fullName = [];

@@ -2,7 +2,7 @@
 @import (css) url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
 @import (css) url('https://fonts.googleapis.com/css?family=Raleway:200,200i,300,300i,400,500,700,700i,900,900i');
 @import (css) url('https://fonts.googleapis.com/css?family=Lato:300,400,500,700,900');
-@import (css) url('https://fonts.googleapis.com/css?family=Poppins:300,400,700,900,900i');
+@import (css) url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900,900i');
 @import "lib";
 
 html {
@@ -69,6 +69,10 @@ a {
     position: relative;
     left: 0;
     transition: all ease .3s;
+    padding-top: 16vh;
+    @media @max-767 {
+      padding-top: 1vh;
+    }
   }
   &.lunched {
     > .side-menu {
@@ -81,6 +85,15 @@ a {
       }
     }
   }
+}
+
+header {
+  position: fixed;
+  top: 0;
+  z-index: 2000;
+  width: 100%;
+  background-color: #ffffff;
+  border-bottom: 1px solid @color-yellow;
 }
 
 .top-nav {
@@ -565,7 +578,7 @@ a {
   @media @max-767 {
     height: 9vh;
   }
-   img {
+  img {
     .aspect-ration();
     width: 100%;
     @media @max-767 {

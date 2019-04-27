@@ -57,3 +57,44 @@ if (!function_exists('translateModel')) {
         return resolve('localization.model')->translate($model, $field);
     }
 }
+if (!function_exists('currency')) {
+    function currency()
+    {
+        return "usd";
+    }
+}
+if (!function_exists('overAllRating')) {
+    function overAllRating(\App\Models\Product $product)
+    {
+        if ($count = $product->ratings()->count()) {
+            return $product->ratings()->sum('ratings.rate') / $count;
+        }
+        return 0;
+    }
+}
+if (!function_exists('overAllRatingPercentage')) {
+    function overAllRatingPercentage(\App\Models\Product $product)
+    {
+        $rate = overAllRating($product);
+        if ($rate) {
+            $rate = (round($rate * 2) / 2) / 5 * 100;
+        }
+        return $rate;
+
+    }
+}
+if (!function_exists('inputIsChecked')) {
+    function inputIsChecked(\Illuminate\Http\Request $request, $name, $val)
+    {
+        if ($request->has($name)) {
+            $values = $request->get($name);
+            if (is_array($values) && in_array($val, $values)) {
+                return "checked";
+            }
+            if ($values == $val) {
+                return "checked";
+            }
+        }
+        return null;
+    }
+}

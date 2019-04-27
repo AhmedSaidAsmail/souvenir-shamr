@@ -71,6 +71,31 @@ class Product extends Model
         return array_column($this->productFilters()->get()->toArray(), 'id');
     }
 
+    public function discount()
+    {
+        return $this->hasMany(Discount::class);
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function price()
+    {
+        $price = [
+            'has_discount' => false,
+            'price' => $this->price,
+        ];
+        if ($discount = $this->discount()->latest()->first()) {
+            $price['price'] *= ((100 - $discount->discount) / 100);
+            $price['has_discount'] = true;
+            $price['discount'] = $discount->discount;
+            $price['before'] = $this->price;
+        }
+        return $price;
+    }
+
     /**
      * @param * @param \Illuminate\Database\Eloquent\Builder $query
      * @param $field

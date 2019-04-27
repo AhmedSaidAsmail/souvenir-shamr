@@ -83,25 +83,11 @@ class CategoriesController extends Controller
      */
     public function show(Request $request, $lang, $name, $id)
     {
-//        $category = Category::FindOrFail($id);
-//        $repo = new CategoryRepo($category, $request);
-//        $repo->find($id,$request);
         $category = Categories::find($request, $id);
-       // dd($category->brands());
-//        $test = [
-//          'child'=>$category->childs(),
-//            'products' => $category->products(),
-//            'filters' => $category->filters(),
-//            'brands'=>$category->brands(),
-//            'max_price'=>$category->price()->max(),
-//            'min_price'=>$category->price()->min(),
-//        ];
-//        dd($test);
-//        // foreach ($category->childs() as $child){
-//        //  print_r($child->count());
-//        // }
-//        //dd($category->products()->count());
-        return view('front.category', compact('lang', 'name', 'category'));
+        if ($request->ajax()) {
+            return view('front.layouts._category_products', compact('lang', 'name', 'category','request'));
+        }
+        return view('front.category', compact('lang', 'name', 'category','request'));
     }
 
     /**

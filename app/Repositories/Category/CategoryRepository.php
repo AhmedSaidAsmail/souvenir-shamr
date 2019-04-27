@@ -107,7 +107,6 @@ class CategoryRepository
 
     public function products($limit = null, $offset = null)
     {
-//        return (new Products($this->newQueryInstance()))->get($limit, $offset);
         return (new ProductsCollection($this->newQueryFactoryInstance()))
             ->get($limit, $offset);
     }
@@ -120,7 +119,6 @@ class CategoryRepository
 
     public function brands()
     {
-//        return (new Brands($this->newQueryInstance()))->get();
         return (new BrandsCollection($this->newQueryFactoryInstance()))
             ->get();
     }
@@ -134,10 +132,6 @@ class CategoryRepository
         return new Price($this->newQueryFactoryInstance());
     }
 
-    private function newQueryInstance()
-    {
-        return (new QueryFactory($this))->makeQuery();
-    }
 
     private function newQueryFactoryInstance()
     {

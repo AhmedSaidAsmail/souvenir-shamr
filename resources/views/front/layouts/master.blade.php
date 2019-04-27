@@ -15,8 +15,10 @@
 <div class="body-wrapper">
     @include('front.layouts._side_nav')
     <div class="content-wrapper">
-        @include('front.layouts._top_nav')
-        @include('front.layouts._main_nav')
+        <header>
+            @include('front.layouts._top_nav')
+            @include('front.layouts._main_nav')
+        </header>
         @yield('banner')
         @yield('content')
         <div class="footer">

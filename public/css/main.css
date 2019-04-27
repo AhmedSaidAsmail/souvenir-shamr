@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
 @import url('https://fonts.googleapis.com/css?family=Raleway:200,200i,300,300i,400,500,700,700i,900,900i');
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400,500,700,900');
-@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,700,900,900i');
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900,900i');
 html {
   width: 100%;
   overflow-x: hidden;
@@ -59,6 +59,12 @@ a {
   position: relative;
   left: 0;
   transition: all ease 0.3s;
+  padding-top: 16vh;
+}
+@media screen and (max-width:767px) {
+  .body-wrapper > .content-wrapper {
+    padding-top: 1vh;
+  }
 }
 .body-wrapper.lunched > .side-menu {
   left: 0;
@@ -70,6 +76,14 @@ a {
   .body-wrapper.lunched > .content-wrapper {
     left: 45%;
   }
+}
+header {
+  position: fixed;
+  top: 0;
+  z-index: 2000;
+  width: 100%;
+  background-color: #ffffff;
+  border-bottom: 1px solid #fff200;
 }
 .top-nav {
   background-color: #fff200;
