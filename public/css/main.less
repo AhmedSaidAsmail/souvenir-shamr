@@ -516,7 +516,7 @@ header {
           > span {
             position: absolute;
             left: calc(100% + 7px);
-            background-color: rgba(56, 174, 4, .3);
+            background-color: @discount-color;
             padding: 0 5px;
             color: rgba(56, 174, 4, 1);
           }
@@ -683,6 +683,25 @@ header {
     margin-top: 25px;
     > a {
       color: @color-logo-2;
+    }
+  }
+}
+
+.languages {
+  > h2 {
+    font-family: @font-poppins;
+    color: @color-clouds;
+    font-size: 17px;
+    margin: 10px;
+  }
+  & .nav-item{
+    >a{
+      display: inline-block;
+      padding: 5px;
+      >img{
+        border: 1px solid @color-clouds;
+        height: 20px;
+      }
     }
   }
 }

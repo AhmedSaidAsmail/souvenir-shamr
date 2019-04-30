@@ -124,10 +124,18 @@
                         </div>
                         <div class="col-md-4 languages text-center">
                             <span>languages</span>
-                            <a href=""><img src="images/en-flag.jpg"> </a>
-                            <a href=""><img src="images/eg-flag.jpg"> </a>
-                            <a href=""><img src="images/ru-flag.jpg"> </a>
-                            <a href=""><img src="images/it-flag.jpg"> </a>
+                            <a href="{{route('home.change.lang',['lang'=>'en'])}}">
+                                <img src="{{asset('images/en-flag.jpg')}}">
+                            </a>
+                            <a href="{{route('home.change.lang',['lang'=>'ar'])}}">
+                                <img src="{{asset('images/eg-flag.jpg')}}">
+                            </a>
+                            <a href="{{route('home.change.lang',['lang'=>'ru'])}}">
+                                <img src="{{asset('images/ru-flag.jpg')}}">
+                            </a>
+                            <a href="{{route('home.change.lang',['lang'=>'it'])}}">
+                                <img src="{{asset('images/it-flag.jpg')}}">
+                            </a>
                         </div>
                         <div class="col-md-4 payment-methods text-center">
                             <span>payment methods</span>

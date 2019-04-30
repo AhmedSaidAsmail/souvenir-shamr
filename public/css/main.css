@@ -721,3 +721,17 @@ header {
 .footer > .footer-copy-rights > a {
   color: #e1005c;
 }
+.languages > h2 {
+  font-family: 'Poppins', sans-serif;
+  color: #ecf0f1;
+  font-size: 17px;
+  margin: 10px;
+}
+.languages .nav-item > a {
+  display: inline-block;
+  padding: 5px;
+}
+.languages .nav-item > a > img {
+  border: 1px solid #ecf0f1;
+  height: 20px;
+}

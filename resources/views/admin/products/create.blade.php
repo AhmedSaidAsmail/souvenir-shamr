@@ -194,7 +194,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Image</label>
+                                            <label>Image ( 710px x 930px)</label>
                                             <input type="file" class="form-control" name="product[basic][img]" required>
                                         </div>
                                     </div>

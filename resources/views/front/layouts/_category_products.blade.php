@@ -110,10 +110,17 @@
                     @foreach($category->products()->chunk(4) as $chunk)
                         <div class="row">
                             @foreach($chunk as $product)
+                                <?php
+                                $product_parameters = [
+                                    'lang' => $lang,
+                                    'name' => translateModel($product, 'name'),
+                                    'id' => $product->id
+                                ]
+                                ?>
                                 <div class="col-md-3">
                                     <div class="category-product">
                                         <div class="product-img">
-                                            <img src="{{asset('images/products/thumb/'.$product->img)}}"
+                                            <img src="{{asset('images/products/thumbMd/'.$product->img)}}"
                                                  alt="{{translateModel($product,'name')}}">
                                         </div>
                                         <div class="product-text">
@@ -136,8 +143,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <a href="" class="btn btn-block">
-                                                    <i class="fas fa-cart-plus"></i> add to cart
+                                                <a href="{{route('home.product',$product_parameters)}}"
+                                                   class="btn btn-block">
+                                                    <i class="fas fa-cart-plus"></i> {{translate('add to cart')}}
                                                 </a>
                                             </div>
                                         </div>

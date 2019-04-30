@@ -25,57 +25,67 @@ class Lang
      */
     public function handle($request, Closure $next)
     {
-        $lang = $request->route()->parameter('lang');
-        $this->lang($request, $lang);
-        return $next($request);
+        return $this->lang($request, $next);
     }
 
     /**
-     * Determine if session has lang and change or put lang if not exists
+     * Handle an incoming request.
      *
      * @param Request $request
-     * @param null $lang
+     * @param Closure $next
+     * @return \Illuminate\Http\RedirectResponse|mixed
      */
-    private function lang(Request $request, $lang = null)
+    public function lang(Request $request, Closure $next)
     {
-        $session_lang = $this->sessionLang($request);
-        if ($this->langIsTrueLang($lang) && $lang !== $session_lang) {
-            $request->session()->put('lang', $lang);
-        } elseif (!$session_lang) {
+        if ($this->sessionHasTrueLang($request)) {
+            return $this->redirectAccordingToSession($request, $next);
+        } else {
             $request->session()->put('lang', self::default_lang);
+            return $next($request);
+        }
+
+    }
+
+    /**
+     * Determine session has lang key and this lang key from lang list
+     *
+     * @param Request $request
+     * @return bool
+     */
+    private function sessionHasTrueLang(Request $request)
+    {
+        return $request->session()->has('lang') && in_array($request->session()->get('lang'), self::languages);
+    }
+
+    /**
+     * Handle request redirect according to session lang key
+     *
+     * @param Request $request
+     * @param Closure $next
+     * @return \Illuminate\Http\RedirectResponse|mixed
+     */
+    private function redirectAccordingToSession(Request $request, Closure $next)
+    {
+        if ($request->session()->get('lang') == $request->route()->parameter('lang')) {
+            return $next($request);
+        } else {
+            return $this->changeRouteAccordingToSession($request);
         }
     }
 
     /**
-     * Check if lang is true language
-     *
-     * @param null $lang
-     * @return bool
-     */
-    private function langIsTrueLang($lang = null)
-    {
-        return !is_null($lang) && in_array($lang, self::languages);
-    }
-
-    /**
-     * Check if session has language or not
+     * Redirect to the same route with lang changing
      *
      * @param Request $request
-     * @return bool
+     * @return \Illuminate\Http\RedirectResponse
      */
-    private function sessionHasLang(Request $request)
+    private function changeRouteAccordingToSession(Request $request)
     {
-        return $request->session()->has('lang');
+        $route_name = $request->route()->getName();
+        $route_parameters = $request->route()->parameters();
+        $session_lang = $request->session()->get('lang');
+        return redirect()->route($route_name, array_replace($route_parameters, ['lang' => $session_lang]));
     }
 
-    /**
-     * Returning session language if it already set or returning null if not
-     *
-     * @param Request $request
-     * @return string|null
-     */
-    private function sessionLang(Request $request)
-    {
-        return $this->sessionHasLang($request) ? $request->session()->get('lang') : null;
-    }
+
 }

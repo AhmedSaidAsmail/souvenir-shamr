@@ -9,7 +9,7 @@
 @endsection
 @section('banner')
     <div class="section-banner">
-        <img src="{{asset('images/sections/'.$section->banner_img)}}" alt="{{$section_name}}">
+        <img src="{{asset('images/sections/'.$section->banner_img)}}" alt="{{$name}}">
     </div>
 @endsection
 @section('content')

@@ -14,11 +14,16 @@ class Filter extends Model
     {
         return $this->hasMany(FilterItem::class);
     }
-
-    public function ProductItems($product_id)
-    {
-        return $this->hasMany(ProductFilterItem::class)->where('product_id', $product_id);
+    public function productFilterItems($product_id){
+        return $this
+            ->hasManyThrough(ProductFilterItem::class,FilterItem::class)
+            ->where('product_filter_items.product_id',$product_id);
     }
+
+//    public function ProductItems($product_id)
+//    {
+//        return $this->hasMany(ProductFilterItem::class)->where('product_id', $product_id);
+//    }
 
     public function delete()
     {

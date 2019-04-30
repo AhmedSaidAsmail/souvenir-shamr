@@ -41,6 +41,11 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
     public function meta()
     {
         return $this->hasOne(ProductMetaTag::class);
@@ -79,6 +84,14 @@ class Product extends Model
     public function ratings()
     {
         return $this->hasMany(Rating::class);
+    }
+
+    public function reviews()
+    {
+        return $this->ratings()
+            ->whereNotNull('review')
+            ->whereNotNull('title')
+            ->where('confirm', 1);
     }
 
     public function price()

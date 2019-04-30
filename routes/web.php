@@ -1,5 +1,5 @@
 <?php
-Route::get('/', ['middleware' => 'lang', 'uses' => 'FrontEndController@index'])->name('home');
+Route::get('/', 'FrontEndController@index')->name('home');
 
 // Admin
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('admin.login');
@@ -20,9 +20,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:web', 'as' => 'admin.']
     Route::resource('products/{product_id}/gallery', 'ProductGalleriesController');
 });
 // Frontend
+Route::get('/change-lang/{lang}', 'FrontEndController@changeLang')->name('home.change.lang');
 Route::group(['prefix' => '/{lang}', 'middleware' => 'lang'], function () {
     Route::get('/', 'FrontEndController@homeWelcome')->name('home.welcome');
-    Route::get('/s/{section_name}/{id}','SectionsController@show')->name('home.section');
-    Route::get('/c/{name}/{id}','CategoriesController@show')->name('home.category');
-    Route::get('/p/{name}/{id}','ProductsController@show')->name('home.product');
+    Route::get('/s/{name}/{id}', 'SectionsController@show')->name('home.section');
+    Route::get('/c/{name}/{id}', 'CategoriesController@show')->name('home.category');
+    Route::get('/p/{name}/{id}', 'ProductsController@show')->name('home.product');
 });

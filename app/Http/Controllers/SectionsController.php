@@ -72,14 +72,14 @@ class SectionsController extends Controller
      * Display the specified resource.
      *
      * @param string $lang
-     * @param string $section_name
+     * @param string $name
      * @param  integer $id
      * @return \Illuminate\Http\Response
      */
-    public function show($lang,$section_name,$id)
+    public function show($lang,$name,$id)
     {
         $section=Section::findOrFail($id);
-        return view('front.section',compact('lang','section','section_name'));
+        return view('front.section',compact('lang','section','name'));
     }
 
     /**

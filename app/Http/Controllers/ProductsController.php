@@ -54,7 +54,8 @@ class ProductsController extends Controller
         $attributes = $request->all()['product'];
         $this->validator($attributes);
         uploading($attributes['basic']['img'], $this->path, function ($image) {
-            $image->thumb(250);
+            $image->thumb(305, 'thumbMd')
+                ->thumb(152, 'thumbSm');
         });
         try {
             /**
@@ -77,12 +78,16 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param string $lang
+     * @param string $name
+     * @param  integer $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($lang, $name, $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return view('front.product', compact('lang', 'name', 'product'));
+
     }
 
     /**

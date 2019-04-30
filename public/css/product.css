@@ -1,0 +1,441 @@
+.product-container {
+  width: 100%;
+  background-color: #fafafa;
+  position: relative;
+  padding-top: 10px;
+  padding-bottom: 40px;
+  min-height: 600px;
+}
+.product-dir {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  margin-bottom: 20px;
+  text-transform: capitalize;
+  font-size: 13px;
+}
+.product-dir > li {
+  position: relative;
+  padding-right: 20px;
+}
+.product-dir > li:after {
+  content: '\f054';
+  font-family: 'Font Awesome\ 5 Free';
+  font-weight: 700;
+  position: absolute;
+  color: #a4b0be;
+  top: 2px;
+  right: 7px;
+  font-size: 10px;
+}
+.product-dir > li:last-child {
+  font-weight: 500;
+  font-size: 14px;
+}
+.product-dir > li:last-child:after {
+  content: '';
+}
+.product-image {
+  background: #ffffff;
+  height: 400px;
+  width: 100%;
+  position: relative;
+}
+.product-image > .img-zoom-container {
+  position: relative;
+  float: right;
+  width: 75%;
+  height: 100%;
+  background-color: #ffffff;
+}
+.product-image > .img-zoom-container > img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.product-image > .images-thumbs {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px;
+}
+.product-image > .images-thumbs > .products-thumb {
+  width: 42px;
+  height: 53px;
+  border: 1px solid #ecf0f1;
+  padding: 3px;
+  margin-bottom: 10px;
+}
+.product-image > .images-thumbs > .products-thumb.active {
+  border-color: #2c3e50;
+}
+.product-image > .images-thumbs > .products-thumb > .thumb {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+.product-image > .images-thumbs > .products-thumb > .thumb > a > img {
+  position: absolute;
+  top: -9999px;
+  bottom: -9999px;
+  left: -9999px;
+  right: -9999px;
+  margin: auto;
+  width: 100%;
+}
+.img-zoom-lens {
+  position: absolute;
+  border: 1px solid #bdc3c7;
+  width: 60%;
+  height: 50%;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.img-zoom-result {
+  border: 1px solid #d4d4d4;
+  /*set the size of the result div:*/
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-repeat: no-repeat;
+  background-color: #ffffff;
+  top: 0;
+  left: 100%;
+  display: none;
+  z-index: 1000;
+}
+.img-zoom-result.available {
+  display: block;
+}
+.product-details {
+  font-family: 'Roboto', sans-serif;
+}
+.product-details > a.brand {
+  text-transform: capitalize;
+  color: #0984e3;
+  text-decoration: none;
+}
+.product-details > h2 {
+  font-size: 20px;
+  color: #2c3e50;
+  margin: 10px 0 0 0;
+}
+.product-details > span.model {
+  color: #7f8c8d;
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+}
+.product-details > .rating .stars-outer {
+  position: relative;
+  display: inline-block;
+  font-family: 'Font Awesome\ 5 Free';
+  font-size: 13px;
+  color: #bdc3c7;
+  z-index: 1;
+}
+.product-details > .rating .stars-outer:before {
+  content: "\f005 \f005 \f005 \f005 \f005";
+  font-weight: 900;
+}
+.product-details > .rating .stars-outer > .stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  z-index: 2;
+}
+.product-details > .rating .stars-outer > .stars-inner:before {
+  content: "\f005 \f005 \f005 \f005 \f005";
+  font-weight: 900;
+  color: #f39c12;
+}
+.product-details > .rating > .rating-num {
+  color: #f39c12;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+}
+.product-details > .rating > .rating-reviews {
+  display: inline-block;
+  margin-left: 10px;
+  color: #7f8c8d;
+  font-family: 'Raleway', sans-serif;
+}
+.product-details > .price-wrapper > span.price {
+  display: block;
+  margin-top: 20px;
+  text-transform: uppercase;
+  font-family: 'Lato', sans-serif;
+  font-size: 30px;
+  font-weight: 900;
+  color: #2c3e50;
+}
+.product-details > .price-wrapper > .discount-wrapper {
+  text-decoration: line-through;
+  color: #7f8c8d;
+  font-size: 13px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.product-details > .price-wrapper > .discount-wrapper > span {
+  background-color: rgba(56, 174, 4, 0.3);
+  color: #38ae04;
+  display: inline-block;
+  margin-left: 7px;
+  padding: 1px 5px;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
+}
+.product-details > .filter {
+  margin-bottom: 15px;
+}
+.product-details > .filter > h3 {
+  text-transform: capitalize;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+}
+.product-details > .filter > a {
+  display: inline-block;
+  margin-right: 10px;
+  border: 1px solid #bdc3c7;
+  border-radius: 3px;
+  padding: 7px 12px;
+  text-transform: capitalize;
+  background-image: linear-gradient(#ffffff, #e6e6e6);
+  text-decoration: none;
+  color: #000000;
+}
+.product-details > .filter > a.active {
+  border: 2px solid #000000;
+  font-weight: 700;
+}
+.product-checkout-wrapper {
+  border-left: 1px solid #bdc3c7;
+}
+.product-checkout-wrapper > .product-checkout {
+  padding-left: 30px;
+}
+.product-checkout-wrapper > .product-checkout > .cart-symbol {
+  display: block;
+  border-bottom: 1px solid #bdc3c7;
+  position: relative;
+  padding-left: 30px;
+  font-size: 12px;
+  color: #7f8c8d;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+.product-checkout-wrapper > .product-checkout > .cart-symbol > span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #f39c12;
+  font-size: 18px;
+}
+.product-checkout-wrapper > .product-checkout > .cart-symbol > h3 {
+  text-transform: uppercase;
+  margin: 0 0 0 0;
+  font-size: 13px;
+  color: #2c3e50;
+}
+.product-checkout-row > [class^=col] {
+  position: relative;
+  padding-top: 30px;
+}
+.product-checkout-row .form-group {
+  position: static !important;
+}
+.product-checkout-row .form-control {
+  border-radius: 0;
+}
+.product-checkout-row label {
+  font-weight: 700;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.product-checkout-row .product-checkout-button {
+  background-color: #0984e3;
+  border-radius: 0;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+}
+.product-description,
+.product-reviews {
+  width: 75%;
+  margin: 60px auto 30px auto;
+}
+.product-description > h2,
+.product-reviews > h2 {
+  text-transform: uppercase;
+  font-family: 'Lato', sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+}
+.product-description > .product-information-wrapper,
+.product-reviews > .product-information-wrapper {
+  background-color: #ffffff;
+  padding: 30px 15px;
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  color: #2c3e50;
+  box-shadow: 2px 2px 4px rgba(189, 195, 199, 0.3);
+  border: 1px solid rgba(189, 195, 199, 0.5);
+  border-radius: 5px;
+}
+.product-rating {
+  background-color: #ffffff;
+  padding: 15px 15px;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  color: #2c3e50;
+  box-shadow: 2px 2px 4px rgba(189, 195, 199, 0.3);
+  border: 1px solid rgba(189, 195, 199, 0.5);
+  border-radius: 5px;
+}
+.ratings-overview {
+  text-align: center;
+}
+.ratings-overview > span.rating-circle {
+  width: 80px;
+  height: 80px;
+  display: block;
+  margin: 0 auto;
+  border: 1px solid rgba(189, 195, 199, 0.5);
+  border-radius: 50%;
+  font-weight: 700;
+  font-family: 'Raleway', sans-serif;
+  font-size: 22px;
+  padding: 20px 25px;
+}
+.ratings-overview > .stars-outer {
+  position: relative;
+  display: inline-block;
+  font-family: 'Font Awesome\ 5 Free';
+  font-size: 21px;
+  margin-bottom: 15px;
+  color: #bdc3c7;
+  z-index: 1;
+}
+.ratings-overview > .stars-outer:before {
+  content: "\f005 \f005 \f005 \f005 \f005";
+  font-weight: 900;
+}
+.ratings-overview > .stars-outer > .stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  z-index: 2;
+}
+.ratings-overview > .stars-outer > .stars-inner:before {
+  content: "\f005 \f005 \f005 \f005 \f005";
+  font-weight: 900;
+  color: #f39c12;
+}
+.ratings-overview > span.rating-of {
+  display: block;
+  font-weight: 900;
+}
+.ratings-overview > span.total-ratings {
+  color: #7f8c8d;
+  display: block;
+  line-height: 10px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+.rating-stars-count {
+  padding-top: 10px;
+}
+.rating-stars-count > .row {
+  margin-bottom: 5px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  color: #7f8c8d;
+}
+.rating-stars-count > .row > .col-md-6 {
+  padding: 0;
+}
+.rating-stars-count .progress {
+  border-radius: 0;
+  background-color: #f2f2f2;
+  border: 1px solid #d8d8d8;
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.7);
+  height: 4vh;
+}
+.rating-stars-count .progress > .progress-bar {
+  background-image: linear-gradient(#ffca00, #ffa900);
+  background-color: rgba(255, 169, 0, 0.1);
+  border: 1px solid #b57700;
+}
+span.rate-this {
+  text-transform: capitalize;
+  display: block;
+  margin-top: 50px;
+  font-weight: 900;
+  font-size: 22px;
+  font-family: 'Lato', sans-serif;
+}
+.select-star-rating {
+  display: inline-block;
+  font-size: 22px;
+  position: relative;
+}
+.select-star-rating:after {
+  content: "\f005 \f005 \f005 \f005 \f005";
+  font-weight: 900;
+  font-family: 'Font Awesome\ 5 Free';
+  color: #bdc3c7;
+}
+.select-star-rating > .select-rating {
+  position: absolute;
+  left: 0;
+  color: #f39c12;
+  opacity: 0;
+}
+.select-star-rating > .select-rating:hover {
+  opacity: 1;
+}
+.select-star-rating > .select-rating.active {
+  opacity: 1;
+}
+.select-star-rating > .select-rating:after {
+  font-weight: 900;
+  font-family: 'Font Awesome\ 5 Free';
+}
+.select-star-rating > .select-rating:nth-child(1) {
+  z-index: 5;
+}
+.select-star-rating > .select-rating:nth-child(1):after {
+  content: "\f005";
+}
+.select-star-rating > .select-rating:nth-child(2) {
+  z-index: 4;
+}
+.select-star-rating > .select-rating:nth-child(2):after {
+  content: "\f005 \f005";
+}
+.select-star-rating > .select-rating:nth-child(3) {
+  z-index: 3;
+}
+.select-star-rating > .select-rating:nth-child(3):after {
+  content: "\f005 \f005 \f005";
+}
+.select-star-rating > .select-rating:nth-child(4) {
+  z-index: 2;
+}
+.select-star-rating > .select-rating:nth-child(4):after {
+  content: "\f005 \f005 \f005 \f005";
+}
+.select-star-rating > .select-rating:nth-child(5) {
+  z-index: 1;
+}
+.select-star-rating > .select-rating:nth-child(5):after {
+  content: "\f005 \f005 \f005 \f005 \f005";
+}

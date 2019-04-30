@@ -54,7 +54,8 @@ class ProductGalleriesController extends Controller
         uploadingResolver()
             ->model(new ProductGallery())
             ->multipleUpload($attributes, 'image', $this->path, function ($image) {
-                $image->thumb(250);
+                $image->thumb(305, 'thumbMd')
+                    ->thumb(152, 'thumbSm');
             });
         try {
             resolve('sync')

@@ -21,7 +21,7 @@
                             <?php
                             $category_parameters = [
                                 'lang' => $lang,
-                                'category_name' => translateModel($category,'name'),
+                                'category_name' => translateModel($category, 'name'),
                                 'id' => $category->id
                             ]
                             ?>
@@ -39,22 +39,22 @@
         <ul class="nav">
             <li class="nav-item">
                 <a href="" class="nav-link">
-                    <img src="images/en-flag.jpg">
+                    <img src="{{asset('images/en-flag.jpg')}}">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('home.change.lang',['lang'=>'ar'])}}" class="nav-link">
+                    <img src="{{asset('images/eg-flag.jpg')}}">
                 </a>
             </li>
             <li class="nav-item">
                 <a href="" class="nav-link">
-                    <img src="images/eg-flag.jpg">
+                    <img src="{{asset('images/ru-flag.jpg')}}">
                 </a>
             </li>
             <li class="nav-item">
                 <a href="" class="nav-link">
-                    <img src="images/ru-flag.jpg">
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="" class="nav-link">
-                    <img src="images/it-flag.jpg">
+                    <img src="{{asset('images/it-flag.jpg')}}">
                 </a>
             </li>
         </ul>

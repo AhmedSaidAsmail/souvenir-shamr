@@ -9,6 +9,9 @@ class Rating extends Model
     protected $fillable = [
         'product_id',
         'customer_id',
-        'rate'
+        'rate',
+        'title',
+        'review',
+        'confirm',
     ];
 }
