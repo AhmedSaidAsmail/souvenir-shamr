@@ -44,5 +44,10 @@
                 <i class="fas fa-universal-access"></i> Sales
             </a>
         </li>
+        <li>
+            <a href="{{route('admin.hotels.index')}}" class="purple">
+                <i class="fas fa-hotel"></i> Hotels
+            </a>
+        </li>
     </ul>
 </div>

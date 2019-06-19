@@ -90,9 +90,9 @@
                     @foreach($product->filters as $filter)
                         <div class="filter">
                             <h3>{{translateModel($filter,'name')}}:</h3>
-                            <input type="hidden" name="[details]{{$filter->en_name}}"
+                            <input type="hidden" name="details[{{$filter->en_name}}]"
                                    value="{{$filter->productFilterItems($product->id)->first()->item->en_name}}"
-                                   class="filter-input">
+                                   class="filter-input" form="addToCart">
                             <?php
                             $active = " active";
                             ?>
@@ -128,13 +128,19 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Quantity</label>
-                                    <input class="form-control" type="number" value="1" min="1" name="quantity">
+                                    <input class="form-control" type="number" value="1" min="1" name="quantity"
+                                           form="addToCart">
                                 </div>
                             </div>
                             <div class="col-md-10">
-                                <button class="btn btn-block product-checkout-button">{{translate('add to cart')}}</button>
+                                <button class="btn btn-block product-checkout-button"
+                                        form="addToCart">{{translate('add to cart')}}</button>
                             </div>
                         </div>
+                        <form method="post" action="{{route('cart.store',['lang'=>$lang])}}" id="addToCart">
+                            <input type="hidden" name="product" value="{{$product->id}}">
+                            {{csrf_field()}}
+                        </form>
                     </div>
                 </div>
             </div>
@@ -203,6 +209,17 @@
 @section('javascript')
     @parent
     <script>
+        $("a.filter-item").click(function (event) {
+            event.preventDefault();
+            var value = $(this).attr('data-content');
+            var allFilters = $(this).closest('.filter').find('.filter-item');
+            var input = $(this).closest('.filter').find('input');
+            if (!$(this).hasClass('active')) {
+                allFilters.removeClass('active');
+                $(this).addClass('active');
+                input.val(value);
+            }
+        });
         $("a.thumb-img").click(function (event) {
             event.preventDefault();
             var wrapper, container, zoomedImg, thumbImg, thumbDestiny, zoomedDestiny;
@@ -315,11 +332,11 @@
         });
         // input rating
         $("div.select-rating").click(function () {
-            var value=$(this).attr('data-alt');
-            var input=$('input#rating');
-            var form=$(this).closest('form');
+            var value = $(this).attr('data-alt');
+            var input = $('input#rating');
+            var form = $(this).closest('form');
             $(this).addClass('active');
-            input.attr('value',value);
+            input.attr('value', value);
             form.submit();
         });
     </script>

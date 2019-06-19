@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Category;
+use App\Models\Hotel;
 use App\Models\Product;
 use App\Models\Section;
 use App\Repositories\LocalizationModelRepo;
@@ -33,8 +34,11 @@ class AppServiceProvider extends ServiceProvider
             $recommendation = Product::recommendationProducts();
             $popular = Product::popularProducts();
             $top = Product::topProducts();
-            $homeCategories=Category::homeCategories();
-            $view->with(compact('recommendation', 'popular', 'top','homeCategories'));
+            $homeCategories = Category::homeCategories();
+            $view->with(compact('recommendation', 'popular', 'top', 'homeCategories'));
+        });
+        view()->composer('front.cart.layouts.shipping_address_form', function ($view) {
+            $view->with(['hotels' => Hotel::all()]);
         });
     }
 

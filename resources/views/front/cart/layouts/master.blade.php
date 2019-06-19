@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @yield('meta_tags')
+    <title>Checkout | Souvenirsharm.com</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link href="https://unpkg.com/ionicons@4.5.5/dist/css/ionicons.min.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
@@ -13,14 +13,14 @@
 </head>
 <body>
 <div class="body-wrapper">
-    @include('front.layouts._side_nav')
     <div class="content-wrapper">
         <header>
             @include('front.layouts._top_nav')
-            @include('front.layouts._main_nav')
+            @yield('checkout_nav')
         </header>
-        @yield('banner')
-        @yield('content')
+        <div class="container checkout-container">
+            @yield('container')
+        </div>
         <div class="footer">
             <div class="container">
                 <div class="footer-links-wrapper row">
@@ -153,54 +153,6 @@
         </div>
     </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="{{asset('js/yall.js')}}"></script>
-<script>document.addEventListener("DOMContentLoaded", yall);</script>
 @yield('javascript')
-<script>
-    // scroll list
-    $(".list-control-next").click(function () {
-        var parent = $(this).closest('.products-list-wrapper');
-        var list = parent.find('.product-list-row');
-        var row = list.find('.row');
-        var row_scroll_width = parseInt(row[0].scrollWidth);
-        var offset = list.scrollLeft();
-        var true_offset = parseInt(offset) + list.width() + 15;
-        var prev_elm = parent.find('.list-control-prev');
-
-        if (true_offset < row_scroll_width) {
-            if (true_offset + list.width() > row_scroll_width) {
-                $(this).addClass('unavailable');
-            }
-            if (prev_elm.hasClass('unavailable')) {
-                prev_elm.removeClass('unavailable');
-            }
-            offset = offset + list.width();
-            list.animate({scrollLeft: offset}, 500);
-            return true;
-        }
-
-
-    });
-    $(".list-control-prev").click(function () {
-        var parent = $(this).closest('.products-list-wrapper');
-        var list = parent.find('.product-list-row');
-        var offset = list.scrollLeft();
-        var next_elm = parent.find('.list-control-next');
-        if (offset > 0) {
-            if (offset < list.width()) {
-                $(this).addClass('unavailable');
-            }
-            if (next_elm.hasClass('unavailable')) {
-                next_elm.removeClass('unavailable');
-            }
-            offset = offset - list.width();
-            console.log(offset);
-            list.animate({scrollLeft: offset}, 500);
-            return true;
-        }
-    });
-</script>
 </body>
 </html>

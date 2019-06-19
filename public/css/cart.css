@@ -1,0 +1,102 @@
+.cart-container {
+  width: 100%;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+.cart-all-items > h3 {
+  font-size: 25px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+}
+.cart-item-wrapper {
+  border: 1px solid #ecf0f1;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.cart-item-wrapper .cart-item-img {
+  width: 100%;
+}
+.cart-item-wrapper .cart-item-img > img {
+  width: 100%;
+  height: auto;
+}
+.cart-item-wrapper > .cart-item-details-wrapper > h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+}
+.cart-item-wrapper > .cart-item-details-wrapper > span.cart-item-price {
+  color: #0984e3;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+.cart-item-wrapper > .cart-item-details-wrapper > span.cart-item-price > label {
+  font-size: 12px;
+  margin-left: 20px;
+  color: #2c3e50;
+  font-style: italic;
+}
+.cart-item-wrapper > .cart-item-details-wrapper > span.cart-item-price > label > i {
+  text-transform: lowercase;
+}
+.cart-item-wrapper > .cart-item-details-wrapper > .cart-item-qty {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.cart-item-wrapper > .cart-item-details-wrapper > .cart-item-qty > span.qty-num {
+  display: inline-block;
+  border: 1px solid #bdc3c7;
+  border-radius: 2px;
+  padding: 3px 20px;
+  font-weight: 700;
+}
+.cart-item-wrapper > .cart-item-remove {
+  width: 90%;
+  margin: 10px auto 0 auto;
+  border-top: 1px solid #ecf0f1;
+  padding: 5px 20px 0 20px;
+}
+.cart-item-wrapper > .cart-item-remove > a {
+  color: #0984e3;
+}
+.cart-total-wrapper {
+  width: 100%;
+  border: 1px solid #ecf0f1;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
+  padding: 15px;
+  font-family: 'Lato', sans-serif;
+}
+.cart-total-wrapper > span.total-ref {
+  display: block;
+  font-weight: 500;
+  font-size: 17px;
+}
+.cart-total-wrapper > span.total-amount {
+  font-weight: 900;
+  font-size: 22px;
+}
+.cart-total-wrapper > span.total-amount-currency {
+  font-size: 16px;
+  color: #2c3e50;
+  text-transform: uppercase;
+}
+.cart-btn {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+.user-register {
+  font-family: 'Roboto', sans-serif;
+  margin-top: 15px;
+  text-align: center;
+}
+.user-register > a {
+  color: #0984e3;
+  text-decoration: underline;
+  font-weight: 500;
+}

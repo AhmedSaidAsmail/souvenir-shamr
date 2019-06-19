@@ -66,7 +66,7 @@ class Handler extends ExceptionHandler
                 $login = "supplier.login";
                 break;
             case "customer":
-                $login = "home";
+                $login = "customer.login";
                 break;
         }
         return redirect()->guest(route($login));

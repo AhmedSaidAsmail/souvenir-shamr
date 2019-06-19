@@ -171,6 +171,7 @@ return [
         Sync\HasMany\SyncServiceProvider::class,
         Uploading\Image\UploadingServiceProvider::class,
         Matrix\Image\ImageServiceProvider::class,
+        App\Src\Cart\CartServiceProvider::class,
 
         /*
          * Application Service Providers...

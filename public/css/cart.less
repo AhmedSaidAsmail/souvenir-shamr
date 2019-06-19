@@ -1,0 +1,115 @@
+@import "lib";
+
+.cart-container {
+  width: 100%;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.cart-all-items {
+  > h3 {
+    font-size: 25px;
+    font-family: @font-Roboto;
+    font-weight: 700;
+  }
+}
+
+.cart-item-wrapper {
+  border: 1px solid @color-clouds;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, .1);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  & .cart-item-img {
+    width: 100%;
+    > img {
+      width: 100%;
+      height: auto;
+    }
+
+  }
+  > .cart-item-details-wrapper {
+    > h3 {
+      font-family: @font-poppins;
+      font-size: 15px;
+    }
+    > span.cart-item-price {
+      color: @color-electron-blue;
+      font-family: @font-Roboto;
+      font-weight: 700;
+      font-size: 20px;
+      text-transform: uppercase;
+      > label {
+        font-size: 12px;
+        margin-left: 20px;
+        color: @color-midnight-blue;
+        font-style: italic;
+        > i {
+          text-transform: lowercase;
+        }
+      }
+    }
+    > .cart-item-qty {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      > span.qty-num {
+        display: inline-block;
+        border: 1px solid @color-silver;
+        border-radius: 2px;
+        padding: 3px 20px;
+        font-weight: 700;
+      }
+    }
+  }
+  > .cart-item-remove {
+    width: 90%;
+    margin: 10px auto 0 auto;
+    border-top: 1px solid @color-clouds;
+    padding: 5px 20px 0 20px;
+    > a {
+      color: @color-electron-blue;
+    }
+  }
+}
+
+.cart-total-wrapper {
+  width: 100%;
+  border: 1px solid @color-clouds;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, .3);
+  margin-bottom: 20px;
+  padding: 15px;
+  font-family: @font-lato;
+  > span.total-ref {
+    display: block;
+
+    font-weight: 500;
+    font-size: 17px;
+  }
+  > span.total-amount {
+    font-weight: 900;
+    font-size: 22px;
+  }
+  > span.total-amount-currency {
+    font-size: 16px;
+    color: @color-midnight-blue;
+    text-transform: uppercase;
+  }
+}
+
+.cart-btn {
+  font-family: @font-poppins;
+  font-weight: 500;
+  font-size: 18px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
+}
+
+.user-register {
+  font-family: @font-Roboto;
+  margin-top: 15px;
+  text-align: center;
+  >a{
+    color: @color-electron-blue;
+    text-decoration: underline;
+    font-weight: 500;
+  }
+}

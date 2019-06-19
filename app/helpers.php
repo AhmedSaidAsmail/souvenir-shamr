@@ -98,3 +98,12 @@ if (!function_exists('inputIsChecked')) {
         return null;
     }
 }
+if (!function_exists('cart')) {
+    /**
+     * @return \App\Src\Cart\ShoppingCart
+     */
+    function cart()
+    {
+        return app()->make('cart');
+    }
+}

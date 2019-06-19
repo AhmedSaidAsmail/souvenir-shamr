@@ -64,7 +64,8 @@
             <div class="col-md-4">
                 <div class="upper-item">
                     <a href="{{route('home.category',$category_parameters)}}">
-                        <img src="{{asset('images/categories/'.$category->image)}}" alt="{{translateModel($category,'name')}}">
+                        <img class="lazy" src="{{asset('images/loading.gif')}}"
+                             data-src="{{asset('images/categories/'.$category->image)}}" alt="{{translateModel($category,'name')}}">
                     </a>
                 </div>
 
