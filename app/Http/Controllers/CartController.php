@@ -2,21 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CreditPaymentGateway;
+use App\Models\PaypalPaymentGateway;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Exception;
 
 class CartController extends Controller
 {
-    public function __construct()
-    {
-    }
-
+    /**
+     * Displaying all shopping cart items
+     *
+     * @param $lang
+     * @return \Illuminate\Support\Facades\Response
+     */
     public function index($lang)
     {
         return view('front.cart.index', ['lang' => $lang, 'cart' => cart()]);
     }
 
+    /**
+     * Adding new item to shopping cart
+     *
+     * @param Request $request
+     * @param $lang
+     * @return \Illuminate\Support\Facades\Response
+     */
     public function store(Request $request, $lang)
     {
         $attributes = $request->all();
@@ -30,6 +41,12 @@ class CartController extends Controller
 
     }
 
+    /**
+     * Displaying shopping cart items and shipping address
+     *
+     * @param $lang
+     * @return \Illuminate\Support\Facades\Response
+     */
     public function checkout($lang)
     {
         $cart = cart();
@@ -39,6 +56,42 @@ class CartController extends Controller
         return view('front.cart.checkout', compact('lang', 'cart'));
     }
 
+    /**
+     * Destroying item exists in shopping cart
+     *
+     * @param $lang
+     * @param $cart_id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy($lang, $cart_id)
+    {
+        cart()->remove($cart_id);
+        return redirect()->route('cart.index', compact('lang'));
+    }
+
+    /**
+     * Making payment to proceed
+     *
+     * @param $lang
+     * @return \Illuminate\Support\Facades\Response
+     */
+    public function payment($lang)
+    {
+        $credit_gateway = CreditPaymentGateway::setting();
+        $paypal_gateway = PaypalPaymentGateway::setting();
+        $default_payment = $this->defaultPayment();
+        $cart = cart();
+        return view(
+            'front.cart.payment',
+            compact('lang', 'cart', 'credit_gateway', 'paypal_gateway', 'default_payment')
+        );
+    }
+
+    /**
+     * Converting product key at request into Product model
+     *
+     * @param array $attributes
+     */
     private function convertProductToModel(array &$attributes)
     {
         array_walk($attributes, function (&$item, $key) {
@@ -48,16 +101,16 @@ class CartController extends Controller
         });
     }
 
-    public function destroy($lang, $cart_id)
+    private function defaultPayment()
     {
-        cart()->remove($cart_id);
-        return redirect()->route('cart.index', compact('lang'));
-    }
-
-    public function payment($lang)
-    {
-        $cart = cart();
-        return view('front.cart.payment', compact('lang', 'cart'));
+        switch (true) {
+            case CreditPaymentGateway::setting():
+                return "payment_gateway";
+            case PaypalPaymentGateway::setting():
+                return "paypal_gateway";
+            default:
+                return "cash_on_delivery";
+        }
     }
 
 }

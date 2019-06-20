@@ -309,24 +309,86 @@
     }
     > .cart-total {
       background-color: @color-silver;
-      padding:20px 10px;
+      padding: 20px 10px;
       font-family: @font-lato;
       > .row {
         font-size: 19px;
         font-weight: 700;
       }
-      >.notes{
+      > .notes {
         font-size: 12px;
         margin-top: 10px;
       }
     }
   }
-  >.btn{
+  > .btn {
     margin-top: 15px;
     font-family: @font-poppins;
     font-weight: 500;
     font-size: 20px;
     padding-top: 12px;
     padding-bottom: 12px;
+  }
+}
+
+.payment-options {
+  margin-top: 20px;
+  margin-bottom: 25px;
+  font-family: @font-lato;
+  > h2 {
+    font-family: @font-poppins;
+    font-size: 20px;
+  }
+  & .payment-options-wrapper {
+    border: 1px solid @color-clouds;
+    border-bottom: 0;
+    > .payment-header {
+      padding: 12px;
+      background-color: @color-clouds;
+      color: @color-midnight-blue;
+      border-bottom: 1px solid @color-silver;
+      > span.total {
+        color: @color-electron-blue;
+        font-weight: 700;
+      }
+    }
+    > .payment-method {
+      padding: 15px;
+      position: relative;
+      border-bottom: 1px solid @color-silver;
+      > .credit-symbols {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        > img {
+          height: 16px;
+          &.paypal{
+            height: 24px;
+          }
+        }
+      }
+      > .credit-form {
+        border: 1px solid @color-silver;
+        padding: 15px;
+        margin: 10px;
+        color: @color-asbestos;
+        & .form-control {
+          border-radius: 0;
+          height: 35px;
+        }
+        & label {
+          margin-bottom: 0;
+        }
+        & .input-group > .form-control {
+          margin-right: 15px;
+        }
+        & .input-group-addon {
+          > img {
+            height: 35px;
+            margin-right: 25px;
+          }
+        }
+      }
+    }
   }
 }
