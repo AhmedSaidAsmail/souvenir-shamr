@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CreditPaymentGateway;
 use App\Models\PaypalPaymentGateway;
 use App\Models\Product;
+use App\Repositories\Checkout;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -85,6 +86,11 @@ class CartController extends Controller
             'front.cart.payment',
             compact('lang', 'cart', 'credit_gateway', 'paypal_gateway', 'default_payment')
         );
+    }
+
+    public function proceedPayment($lang,Checkout $checkout)
+    {
+        dd($checkout->all());
     }
 
     /**

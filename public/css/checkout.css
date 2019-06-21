@@ -313,6 +313,20 @@
   padding-top: 12px;
   padding-bottom: 12px;
 }
+.right-cart-items-container > .btn > img {
+  display: none;
+}
+.right-cart-items-container > .btn.active {
+  position: relative;
+}
+.right-cart-items-container > .btn.active > img {
+  position: absolute;
+  z-index: 2;
+  width: 50px;
+  left: 0;
+  top: 0;
+  display: block;
+}
 .payment-options {
   margin-top: 20px;
   margin-bottom: 25px;

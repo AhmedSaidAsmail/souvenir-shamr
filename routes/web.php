@@ -49,5 +49,8 @@ Route::group(['prefix' => '/{lang}', 'middleware' => 'lang'], function () {
         ->middleware('auth:customer');
     Route::get('/cart/checkout/payment', ['uses' => 'CartController@payment'])
         ->name('cart.payment')
+        ->middleware(['auth:customer','cart']);
+    Route::post('/cart/checkout/payment/proceed', ['uses' => 'CartController@proceedPayment'])
+        ->name('cart.payment.proceed')
         ->middleware('auth:customer');
 });
