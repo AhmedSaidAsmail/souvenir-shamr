@@ -26,6 +26,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:web', 'as' => 'admin.']
     Route::resource('products', 'ProductsController');
     Route::resource('products/{product_id}/gallery', 'ProductGalleriesController');
     Route::resource('/hotels', 'HotelsController');
+    Route::resource('/reservations', 'ReservationsController');
+    Route::resource('/customers', 'customersController',['only'=>['index','show']]);
 });
 // end Admin
 // Frontend
@@ -49,8 +51,13 @@ Route::group(['prefix' => '/{lang}', 'middleware' => 'lang'], function () {
         ->middleware('auth:customer');
     Route::get('/cart/checkout/payment', ['uses' => 'CartController@payment'])
         ->name('cart.payment')
-        ->middleware(['auth:customer','cart']);
+        ->middleware(['auth:customer', 'cart']);
     Route::post('/cart/checkout/payment/proceed', ['uses' => 'CartController@proceedPayment'])
         ->name('cart.payment.proceed')
+        ->middleware('auth:customer');
+    Route::get('/cart/checkout/payment/done/{reservation_id}', ['uses' => 'CartController@donePayment'])
+        ->name('cart.payment.done');
+    Route::get('/cart/checkout/payment/success/{reservation_id}', ['uses' => 'CartController@success'])
+        ->name('cart.checkout.success')
         ->middleware('auth:customer');
 });

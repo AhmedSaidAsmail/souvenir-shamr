@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCreditCardsTable extends Migration
+class CreateReservationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,18 @@ class CreateCreditCardsTable extends Migration
      */
     public function up()
     {
-        Schema::create('credit_cards', function (Blueprint $table) {
+        Schema::create('reservations', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('unique_id');
             $table->integer('customer_id')->unsigned();
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
-            $table->string('name');
-            $table->string('cc_no');
-            $table->integer('cc_expire_month');
-            $table->integer('cc_expire_year');
-            $table->string('cvv');
+            $table->text('transaction_id')->nullable();
+            $table->string('order_number')->nullable();
+            $table->string('payment_method')->nullable();
+            $table->boolean('payment_approval')->default(0);
+            $table->float('total');
+            $table->string('currency');
+            $table->boolean('archive')->default(0);
             $table->timestamps();
         });
     }
@@ -33,6 +36,6 @@ class CreateCreditCardsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('credit_cards');
+        Schema::dropIfExists('reservations');
     }
 }

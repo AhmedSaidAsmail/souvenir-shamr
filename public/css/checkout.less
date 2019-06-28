@@ -407,3 +407,50 @@
     }
   }
 }
+
+.success-checkout {
+  width: 90%;
+  margin: 60px auto;
+  > h1 {
+    text-align: center;
+    font-family: @font-poppins;
+    font-size: 25px;
+    font-weight: 700;
+  }
+  > .checkout-success-details {
+    padding: 0 20px;
+    margin-top: 20px;
+    border: 1px solid @color-silver;
+    > .checkout-success-details-header {
+      border-bottom: 1px solid @color-silver;
+      padding: 10px;
+      > h2 {
+        text-align: center;
+        font-family: @font-Roboto;
+        font-size: 20px;
+        font-weight: 700;
+      }
+    }
+    > .checkout-success-details-body {
+      & .img-wrapper {
+        overflow: hidden;
+        >img{
+          width: 100%;
+        }
+      }
+      & .details-wrapper{
+        padding:80px 20px;
+        font-family: @font-Roboto;
+        >table{
+          width: 100%;
+          & tr{
+            & td:first-child{
+              padding-right: 20px;
+              font-weight: 700;
+            }
+          }
+        }
+      }
+    }
+  }
+}

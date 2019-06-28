@@ -275,3 +275,28 @@ ul.costume-list > li {
 ul.costume-list > li > a.btn {
   padding: 1px 15px;
 }
+.fields-section {
+  font-family: 'Lato', sans-serif;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #bdc3c7;
+}
+.fields-section span.field-name {
+  font-weight: 700;
+}
+.fields-section > h2 {
+  font-weight: 700;
+  font-size: 20px;
+}
+.fields-section > .credit,
+.fields-section > .reservation {
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 5px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+}
+.fields-section > .reservation a {
+  color: #e67e22;
+  font-family: 'Mallanna', sans-serif;
+  text-decoration: underline;
+}

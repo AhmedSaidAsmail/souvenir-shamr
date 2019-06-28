@@ -41,6 +41,20 @@
     </div>
 @endsection
 @section('container')
+    @if(session()->has('failure'))
+        <div class="alert alert-danger">
+            {{session()->get('failure')}}
+        </div>
+    @endif
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="row">
         <div class="col-md-8 checkout-details-wrapper">
             @include('front.cart.layouts.shipping_address_form')
@@ -78,7 +92,7 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label>{{translate('Card number')}} *</label>
-                                                <input class="form-control" value="4000000000000002"
+                                                <input class="form-control" value=""
                                                        name="credit[cc_no]" required>
                                             </div>
                                         </div>
@@ -87,7 +101,7 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label>{{translate('Card holder\'s name')}} *</label>
-                                                <input class="form-control" value="Ahmed Said asmail"
+                                                <input class="form-control" value=""
                                                        name="credit[name]" required>
                                             </div>
                                         </div>
@@ -99,13 +113,13 @@
                                                 <div class="input-group">
                                                     <select class="form-control" name="credit[cc_expire_month]"
                                                             required>
-                                                        <option value="02">MM</option>
+                                                        <option value="">MM</option>
                                                         @for($i=1;$i<=12;$i++)
                                                             <option value="{{sprintf('%02d',$i)}}">{{sprintf('%02d',$i)}}</option>
                                                         @endfor
                                                     </select>
                                                     <select class="form-control" name="credit[cc_expire_year]" required>
-                                                        <option value="2020">YYYY</option>
+                                                        <option value="">YYYY</option>
                                                         @for($i=0;$i<20;$i++)
                                                             <option value="{{\Carbon\Carbon::now()->addYear($i)->format('Y')}}">
                                                                 {{\Carbon\Carbon::now()->addYear($i)->format('Y')}}
@@ -125,7 +139,7 @@
                                                     <div class="input-group-addon">
                                                         <img src="{{asset('images/cvv.png')}}">
                                                     </div>
-                                                    <input class="form-control" value="012" name="credit[cvv]" required>
+                                                    <input class="form-control" value="" name="credit[cvv]" required>
                                                 </div>
                                             </div>
                                         </div>

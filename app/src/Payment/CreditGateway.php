@@ -84,10 +84,15 @@ class CreditGateway extends AbstractPaymentGateway
      * @return PaymentResponse
      * @throws PaymentGatewayException
      */
-    protected function makeResponse(array $charge)
+    protected function makeResponse(array $charge = [])
     {
         if ($approved = $charge['response']['responseCode'] == 'APPROVED') {
-            return PaymentResponse::makeResponse(true, $charge['response']['orderNumber']);
+            return PaymentResponse::makeResponse(
+                $this->redirectLink,
+                true,
+                "TwoCheckout",
+                $charge['response']['orderNumber']
+            );
         }
         throw new PaymentGatewayException('Payment is not approved');
     }

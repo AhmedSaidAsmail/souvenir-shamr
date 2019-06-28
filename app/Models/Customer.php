@@ -11,4 +11,14 @@ class Customer extends User
         return $this->hasOne(CustomerDetail::class);
     }
 
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
+
+    public function creditCards()
+    {
+        return $this->hasMany(CreditCard::class);
+    }
+
 }

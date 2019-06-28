@@ -6,15 +6,20 @@ use Illuminate\Http\Request;
 
 class PaymentFactory
 {
-    public static function makePayment(Request $request)
+    /**
+     * @param Request $request
+     * @param $redirectLink
+     * @return PaymentMethodInterface
+     */
+    public static function makePayment(Request $request,$redirectLink)
     {
         switch ($request->get('payment_method')) {
             case "payment_gateway":
-                return new CreditGateway($request);
+                return new CreditGateway($request,$redirectLink);
             case "paypal":
-                return new PaypalGateway($request);
+                return new PaypalGateway($request,$redirectLink);
             default:
-                return new CashOnDelivery($request);
+                return new CashOnDelivery($request,$redirectLink);
         }
 
     }

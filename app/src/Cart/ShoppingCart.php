@@ -119,5 +119,18 @@ class ShoppingCart
             ->total();
     }
 
+    public function __toArray(callable $attributesFunc)
+    {
+        return array_map($attributesFunc, $this->collectionInstance()->all());
+    }
+
+    /**
+     * Destroying current cart collection
+     */
+    public function destroy()
+    {
+        $this->request->session()->put(self::$CartName, new CartCollection());
+    }
+
 
 }

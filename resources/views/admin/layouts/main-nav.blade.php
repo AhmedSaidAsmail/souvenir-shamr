@@ -35,12 +35,12 @@
             </a>
         </li>
         <li>
-            <a href="" class="green">
+            <a href="{{route('admin.customers.index')}}" class="green">
                 <i class="fas fa-user-circle"></i> Customers
             </a>
         </li>
         <li>
-            <a href="" class="yellow">
+            <a href="{{route('admin.reservations.index')}}" class="yellow">
                 <i class="fas fa-universal-access"></i> Sales
             </a>
         </li>

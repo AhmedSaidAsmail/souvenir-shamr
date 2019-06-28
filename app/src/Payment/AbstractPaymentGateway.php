@@ -5,22 +5,27 @@ namespace App\Src\Payment;
 
 use Illuminate\Http\Request;
 
-abstract class AbstractPaymentGateway
+abstract class AbstractPaymentGateway implements PaymentMethodInterface
 {
+    /**
+     * @var Request $request
+     */
     protected $request;
-
-    public function __construct(Request $request)
-    {
-        $this->request = $request;
-    }
+    /**
+     * @var string $redirectLink
+     */
+    protected $redirectLink;
 
     /**
-     * Proceed payment and generate redirect link
-     *
-     * @return PaymentResponse
-     * @throws \App\Src\Payment\Exceptions\PaymentGatewayException
+     * AbstractPaymentGateway constructor.
+     * @param Request $request
+     * @param string $redirectLink
      */
-    abstract public function proceed();
+    public function __construct(Request $request,$redirectLink)
+    {
+        $this->request = $request;
+        $this->redirectLink=$redirectLink;
+    }
 
     /**
      * Determine if payment setting is exists
@@ -34,6 +39,6 @@ abstract class AbstractPaymentGateway
      * @return PaymentResponse
      * @throws \App\Src\Payment\Exceptions\PaymentGatewayException
      */
-   abstract protected function makeResponse(array $charge);
+   abstract protected function makeResponse(array $charge=[]);
 
 }

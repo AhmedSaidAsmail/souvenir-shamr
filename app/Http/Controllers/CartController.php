@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CreditPaymentGateway;
 use App\Models\PaypalPaymentGateway;
 use App\Models\Product;
+use App\Models\Reservation;
 use App\Repositories\Checkout;
 use Illuminate\Http\Request;
 use Exception;
@@ -88,9 +89,34 @@ class CartController extends Controller
         );
     }
 
-    public function proceedPayment($lang,Checkout $checkout)
+    public function proceedPayment($lang, Checkout $checkout)
     {
-        dd($checkout->all());
+        try {
+            $response = $checkout->checkout($lang, 'cart.payment.done');
+            return redirect()->to($response->redirectLink);
+
+        } catch (Exception $exception) {
+            return redirect()->route('cart.payment')->with('failure', $exception->getMessage());
+        }
+    }
+
+    public function donePayment(Checkout $checkout, $lang, $reservation_id)
+    {
+        try {
+            $checkout->checkoutDone($reservation_id);
+            return redirect()->route('cart.checkout.success', compact('lang','reservation_id'));
+        } catch (Exception $exception) {
+            return redirect()
+                ->route('cart.payment', compact('lang'))
+                ->with('failure', $exception->getMessage());
+        }
+
+    }
+
+    public function success($lang,$reservation_id)
+    {
+        $reservation=Reservation::findOrFail($reservation_id);
+        return view('front.cart.success', compact('lang','reservation'));
     }
 
     /**
