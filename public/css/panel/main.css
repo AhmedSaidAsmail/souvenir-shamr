@@ -300,3 +300,28 @@ ul.costume-list > li > a.btn {
   font-family: 'Mallanna', sans-serif;
   text-decoration: underline;
 }
+.setting-wrapper {
+  margin-top: 60px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background-color: rgba(0, 0, 0, 0.03);
+  padding: 15px;
+}
+.setting-wrapper a {
+  font-size: 19px;
+}
+.payment-section {
+  margin-top: 20px;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 5px;
+  padding: 25px 25px;
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+}
+.payment-section:last-child {
+  margin-bottom: 160px;
+}
+.payment-section > h2 {
+  font-size: 18px;
+  font-weight: 700;
+}

@@ -49,5 +49,10 @@
                 <i class="fas fa-hotel"></i> Hotels
             </a>
         </li>
+        <li>
+            <a href="{{route('admin.settings')}}" class="red">
+                <i class="fas fa-users-cog"></i> Settings
+            </a>
+        </li>
     </ul>
 </div>

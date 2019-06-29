@@ -305,16 +305,44 @@ ul.costume-list {
     font-size: 20px;
   }
   > .credit, > .reservation {
-    background-color: rgba(0,0,0,.03);
+    background-color: rgba(0, 0, 0, .03);
     border-radius: 5px;
     padding: 15px 20px;
     margin-bottom: 15px;
   }
-  > .reservation{
-    a{
+  > .reservation {
+    a {
       color: @color-carrot;
       font-family: @font-Mallanna;
       text-decoration: underline;
     }
+  }
+}
+
+.setting-wrapper {
+  margin-top: 60px;
+  font-family: @font-lato;
+  font-weight: 500;
+  background-color: rgba(0, 0, 0, .03);
+  padding: 15px;
+  & a {
+    font-size: 19px;
+  }
+}
+
+.payment-section {
+  margin-top: 20px;
+  background-color: rgba(0, 0, 0, .03);
+  border-radius: 5px;
+  padding: 25px 25px;
+  font-family: @font-lato;
+  font-size: 13px;
+  &:last-child{
+    margin-bottom: 160px;
+  }
+  > h2 {
+    font-size: 18px;
+    font-weight: 700;
+
   }
 }

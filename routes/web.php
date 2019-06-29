@@ -14,6 +14,8 @@ Route::post('/login', 'Auth\LoginController@login')->name('admin.login');
 Route::get('/logout', 'Auth\LoginController@logout')->name('admin.logout');
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:web', 'as' => 'admin.'], function () {
     Route::get('/', 'AdminController@welcome')->name('admin.welcome');
+    Route::get('/settings', 'AdminController@settings')->name('settings');
+    Route::get('/settings/payment', 'AdminController@payment')->name('settings.payment');
     Route::resource('/filters', 'FiltersController');
     Route::resource('/brands', 'BrandsController');
     Route::resource('/sections', 'SectionsController');
@@ -26,8 +28,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:web', 'as' => 'admin.']
     Route::resource('products', 'ProductsController');
     Route::resource('products/{product_id}/gallery', 'ProductGalleriesController');
     Route::resource('/hotels', 'HotelsController');
-    Route::resource('/reservations', 'ReservationsController');
-    Route::resource('/customers', 'customersController',['only'=>['index','show']]);
+    Route::resource('/reservations', 'ReservationsController', ['only' => ['index', 'show']]);
+    Route::resource('/customers', 'customersController', ['only' => ['index', 'show']]);
+    Route::resource('/paypal', 'PaypalController', ['only' => ['store', 'update','destroy']]);
+    Route::resource('/credit', 'CreditPaymentGatewayController', ['only' => ['store', 'update','destroy']]);
+    Route::resource('/localization', 'LocalizationController');
 });
 // end Admin
 // Frontend
